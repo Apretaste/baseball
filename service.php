@@ -1,11 +1,13 @@
 <?php
+
 //http://wap.mlb.com/scores/index.jsp
 //www.baseball-reference.com/
 //http://mlb.mlb.com/mlb/events/winterleagues/league.jsp?league=car
+
 use Goutte\Client;
 use Symfony\Component\DomCrawler\Crawler;
 
-class Beisbol extends Service
+class Baseball extends Service
 {
 	public $apiFD = null;
 
