@@ -10,8 +10,8 @@
 	</tr>
 	<tr bgcolor="{cycle values="#f2f2f2,white"}">
 		<td style="font-weight: bold;">Major League Baseball</td>
-		<td style="">{link href="BEISBOL MLB jornada {$smarty.now|date_format:"%d/%m/%Y"}" caption="Juegos de hoy"}</td>
-		<td style="" colspan="1">{button href="BEISBOL MLB LIGA" caption="Ver Liga" color="green" size="small"}</td>
+		<td style="">{link href="BASEBALL MLB jornada {$smarty.now|date_format:"%d/%m/%Y"}" caption="Juegos de hoy"}</td>
+		<td style="" colspan="1">{button href="BASEBALL MLB LIGA" caption="Ver Liga" color="green" size="small"}</td>
 	</tr>
 	<tr bgcolor="{cycle values="#f2f2f2,white"}">
 		<td colspan="4">

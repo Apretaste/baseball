@@ -5,7 +5,7 @@
 	{space10}
 	<h1>{$nombreLiga}</h1>
 	{space5}
-	<table style="text-align:center" width="100%">
+	<table style="text-align:center" width="100%" border="1">
 		<tr>
 		{for $i=0 to 11}
 			<th><h2>{$ligas[$nombreLiga]['cabecera'][$i]|regex_replace: '/GF/':'CF'|regex_replace: '/GC/':'CC'}</h2></th>
@@ -21,8 +21,10 @@
 			</tr>
 		{/for}
 	</table>
+
 	{space10}
-	<table style="text-align:center" width="100%">
+
+	<table style="text-align:center" width="100%" border="1">
 		<tr>
 		{for $i=12 to 23}
 			<th><h2>{$ligas[$nombreLiga]['cabecera'][$i]|regex_replace: '/GF/':'CF'|regex_replace: '/GC/':'CC'}</h2></th>
@@ -38,7 +40,7 @@
 		{/for}
 	</table>
 	{space10}
-	<table style="text-align:center" width="100%">
+	<table style="text-align:center" width="100%" border="1">
 		<tr>
 		{for $i=24 to 35}
 			<th><h2>{$ligas[$nombreLiga]['cabecera'][$i]|regex_replace: '/GF/':'CF'|regex_replace: '/GC/':'CC'}</h2></th>
@@ -56,6 +58,7 @@
 {/foreach}
 
 {space10}
+
 <table style="text-align:center" width="100%">
 	<tr>
 		<td><font size="1"><b>G:</b> Juegos Ganados</font></td>
@@ -78,44 +81,30 @@
 
 {space15}
 
-<h1>Líderes de la MLB</h1>
-<table style="text-align:center" width="100%">
+<h1>L&iacute;deres de la MLB</h1>
 {foreach $leagueStats as $tableStat}
 	{if !empty($tableStat)}
-	<tr>
-		<td align="center">
-			{space10}
-			<table width="50%">
+		<table width="100%" border="0">
 			{for $i=0 to 5}
 			{assign var="tr" value=$tableStat[$i]}
 				<tr>
 					{foreach $tr as $td}
 						{if $i == 0}
-							<th><h2>{$td}</h2></th>
+							<th align="left"><h2>{$td}</h2></th>
 						{else}
 							<td>{$td}</td>
 						{/if}
 					{/foreach}
 				</tr>
 			{/for}
-			</table>
-		</td>
-	</tr>
+		</table>
+		{space10}
 	{/if}
 {/foreach}
-</table>
 
 {space15}
 
-<!--<font size="1" color="red">{$tests}</font>-->
-<table style="text-align:center;" width="100%">
-	<tr>
-		<td style="" colspan="1">
-		  	{button href="BEISBOL MLB jornada {$smarty.now|date_format:"%d/%m/%Y"}" caption="Jornada Actual" color="green"}
-		</td>
-		<td style="" colspan="1">
-		 	{button href="BEISBOL MLB jornada {'+1 day'|date_format:"%d/%m/%Y"}" caption="Pr&oacute;xima Jornada" color="green"}
-		</td>
-	</tr>
-</table>
+{button href="BASEBALL MLB jornada {$smarty.now|date_format:"%d/%m/%Y"}" caption="Jornada Actual" color="green"}
+{button href="BASEBALL MLB jornada {'+1 day'|date_format:"%d/%m/%Y"}" caption="Pr&oacute;xima Jornada" color="green"}
+
 {space10}

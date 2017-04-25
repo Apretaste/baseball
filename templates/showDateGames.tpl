@@ -85,7 +85,7 @@
 <table style="text-align:center;" width="100%">
 	<tr>
 		<td style="" colspan="1">
-			{button href="BEISBOL MLB LIGA" caption="Ver Liga" color="green" }
+			{button href="BASEBALL MLB LIGA" caption="Ver Liga" color="green" }
 		</td>
 	</tr>
 </table>
