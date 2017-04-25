@@ -14,8 +14,10 @@
 		<td style="" colspan="1">{button href="BEISBOL MLB LIGA" caption="Ver Liga" color="green" size="small"}</td>
 	</tr>
 	<tr bgcolor="{cycle values="#f2f2f2,white"}">
-		{space10}
-		<td colspan="3"><small>&iexcl;Proximamente las ligas del caribe!</small></td>
+		<td colspan="4">
+			{space10}
+			<small>&iexcl;Proximamente las ligas del caribe!</small>
+		</td>
 	</tr>
 </table>
 
