@@ -4,7 +4,7 @@
 		<alias>beisbol</alias>
 		<alias>pelota</alias>
 	</serviceAliases>
-	<serviceDescription>Consulta y muestra resultados de algunos torneos importantes de baseball.</serviceDescription>
+	<serviceDescription>Consulta y muestra resultados de algunos torneos importantes de baseball</serviceDescription>
 	<creatorEmail>jaikerkings@yahoo.es</creatorEmail>
 	<serviceCategory>ocio</serviceCategory>
 	<serviceUsage>
