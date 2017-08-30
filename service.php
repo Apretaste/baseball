@@ -17,18 +17,20 @@ class Baseball extends Service
 	 * @param Request
 	 * @return Response
 	 * */
-	public function _main(Request $request){
-		if (empty($request->query) || (strtolower($request->query) != 'liga') || (strtolower($request->query) != 'jornada') || (strtolower($request->query) != 'equipo')){
-
+	public function _main(Request $request)
+	{
+		if (empty($request->query) || (strtolower($request->query) != 'liga') || (strtolower($request->query) != 'jornada') || (strtolower($request->query) != 'equipo'))
+		{
 			$response = new Response();
+			$response->setCache("day");
 			$response->setResponseSubject("¿Cual liga deseas consultar?");
 			$response->createFromTemplate("selectLiga.tpl", array("ligas" => array()));
 			return $response;
 		}
 	}
 
-	public function _mlb(Request $request){
-		//http://wap.mlb.com/scores/?locale=es_CO#date=04/06/2017
+	public function _mlb(Request $request)
+	{
 		$datos = explode(" ", $request->query);
 		$tipoConsulta = $datos[0];
 		$dato1 = (isset($datos[1])) ? $datos[1] : "";
@@ -36,11 +38,11 @@ class Baseball extends Service
 		$juegosEnCurso = 0;
 		$juegosProgramados = 0;
 		$juegosTerminados = 0;
+
 		// Setup crawler
 		$client = new Client();
 
 		if (strtoupper($tipoConsulta) == "JORNADA"){
-			//$url = "http://wap.mlb.com/scores/?locale=es_CO#date=".$dato1;
 			$url = "http://scoresline.com/scores.asp?F=MLB&Date=".$dato1;
 			$crawler = $client->request('GET', $url);
 
@@ -153,12 +155,14 @@ class Baseball extends Service
 				"juegosProgramados" => $juegosProgramados,
 				"games" => $games
 			);
+
 			$response = new Response();
+			$response->setCache("month");
 			$response->setResponseSubject("Juegos del " . $dato1);
 			$response->createFromTemplate("showDateGames.tpl", $responseContent);
-
-		}elseif (strtoupper($tipoConsulta) == "LIGA") {
-			//http://mlb.mlb.com/es/standings/index.jsp
+		}
+		elseif (strtoupper($tipoConsulta) == "LIGA")
+		{
 			$url = "http://www.espn.com.ve/beisbol/mlb/posiciones";
 			$crawler = $client->request('GET', $url);
 			$titulo = $crawler->filter("header.automated-header h1")->text();
@@ -236,6 +240,7 @@ class Baseball extends Service
 			);
 
 			$response = new Response();
+			$response->setCache("month");
 			$response->setResponseSubject("MLB");
 			$response->createFromTemplate("showLeagueInfo.tpl", $responseContent);
 		}
@@ -307,67 +312,6 @@ class Baseball extends Service
 		$texto = preg_replace('/Washington/', 'Washington Nationals', $texto);
 		return $texto;
 	}
-
-	/*private function searchEquipoXid($query, $apiFD){
-		$datos = explode(" ", $query);
-		$idLiga = $datos[0];
-		$equipo = $datos[1];
-		$soccerseason = $apiFD->getSoccerseasonById($idLiga);
-
-		if (strtoupper($equipo) == "TODOS"){
-			$equipos = $soccerseason->getTeams();
-			$textoAsunto = "Equipos que compiten en la ".$soccerseason->payload->caption;
-		}else{
-			$teamName = substr($query, 4);
-			// search for desired team
-			$searchQuery = $apiFD->searchTeam(urlencode($teamName));
-
-			$equipos = $apiFD->getTeamById($searchQuery->teams[0]->id);
-			$fixturesHome = $equipos->getFixtures('home')->fixtures;
-			$fixturesAway = $equipos->getFixtures('away')->fixtures;
-			$players = $equipos->getPlayers();
-			$imgTeamSource = $equipos->_payload->crestUrl;
-			$extension = substr($imgTeamSource, -4);
-
-			$di = \Phalcon\DI\FactoryDefault::getDefault();
-			$wwwroot = $di->get('path')['root'];
-			$imgTeamCacheFile = "$wwwroot/temp/" . "team_".$idLiga."_".$searchQuery->teams[0]->id."_logoCacheFile.png"; //
-			if(!file_exists($imgTeamCacheFile)){
-				if (strtolower($extension) == '.svg'){
-					$image = new Imagick();
-					$image->readImageBlob($this->file_get_contents_curl($imgTeamSource)); //imagen svg
-					$image->setImageFormat("png24");
-					$image->resizeImage(1024, 768, imagick::FILTER_LANCZOS, 1);
-					$image->writeImage($imgTeamCacheFile); //imagen png
-				}else{
-					file_put_contents($imgTeamCacheFile, file_get_contents($imgTeamSource));
-
-				}
-			}
-			$textoAsunto = "Datos del ".$teamName;
-		}
-		// create a json object to send to the template
-		$responseContent = array(
-			"titulo" => $textoAsunto,
-			"liga" => $soccerseason,
-			"equipo" => $equipo,
-			"equipos" => $equipos,
-			"juegosHome" => $fixturesHome,
-			"juegosAway" => $fixturesAway,
-			"jugadores" => $players,
-			"imgTeam" => $imgTeamCacheFile
-		);
-		// get the images to embed into the email
-		$images = array(
-			"imgTeam" => $imgTeamCacheFile
-		);
-		// create the response
-		$response = new Response();
-		$response->setResponseSubject($textoAsunto);
-		$response->createFromTemplate("showLeagueTeams.tpl", $responseContent, $images);
-		return $response;
-	}
-	*/
 
 	private function file_get_contents_curl($url)
 	{
