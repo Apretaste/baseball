@@ -31,6 +31,7 @@ class Baseball extends Service
 
 	public function _mlb(Request $request)
 	{
+		$response = new Response();
 		$datos = explode(" ", $request->query);
 		$tipoConsulta = $datos[0];
 		$dato1 = (isset($datos[1])) ? $datos[1] : "";
