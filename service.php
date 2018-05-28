@@ -166,34 +166,33 @@ class Baseball extends Service
 		{
 			$url = "http://www.espn.com.ve/beisbol/mlb/posiciones";
 			$crawler = $client->request('GET', $url);
-			$titulo = $crawler->filter("header.automated-header h1")->text();
+			$titulo = $crawler->filter('section > div.mb5.flex.justify-between.items-center > h1')->text();
 			$nombresLigas = array();
-			$crawler->filter("h2.table-caption span.long-caption")->each(function($item, $i) use (&$nombresLigas){
+			$crawler->filter("div.Table2__Title")->each(function($item, $i) use (&$nombresLigas){
 				$nombresLigas[] = $item->text();
 			});
 
-			$ligas = array();
-			$crawler->filter("table.standings.has-team-logos")->each(function($item, $i) use (&$ligas, &$nombresLigas){
-				$cabecera = array();
-				$posiciones = array();
-				$item->filter("th")->each(function($item, $i) use (&$cabecera){
-					$cabecera[] = $item->text();
-				});
-
-				$item->filter("tr")->each(function($item, $i) use (&$posiciones){
-					$tds = array();
-					$item->filter("td")->each(function($item, $i) use (&$tds){
-						$tds[] = $item->text();
-					});
-					$posiciones[] = $tds;
-				});
-
-				$ligas[$nombresLigas[$i]] = array(
-						"cabecera" => $cabecera,
-						"posiciones" => $posiciones,
-						"content" => print_r($posiciones,true)
-				);
+			$firstColum=array();
+			$crawler->filter("tbody.Table2__tbody tr td span:not(.hide-mobile):not(.stat-cell):not(.subHeader__item--content):not(.TeamLink__Logo):not(.arrow-icon_cont)")->each(function($item, $i) use (&$firstColum){
+				$firstColum[] = strtoupper($item->text());
 			});
+
+			$headers=array();
+			$crawler->filter("tbody.Table2__tbody span.subHeader__item--content")->each(function($item, $i) use (&$headers){
+			$headers[] = $item->text();
+			});
+
+			$data=array();
+			$crawler->filter("tbody.Table2__tbody span.stat-cell")->each(function($item, $i) use (&$data){
+			$data[] = $item->text();
+			});
+			for ($i=0; $i<36 ; $i+=6) {
+				$firstColum[$i]=str_replace("LIGA AMERICANA","LA",$firstColum[$i]);
+				$firstColum[$i]=str_replace("LIGA NACIONAL","LN",$firstColum[$i]);
+			}
+			$ligas=['firstColum' =>$firstColum,
+						 'headers' => $headers,
+					 	 'data' => $data];
 
 			$url = "http://www.espn.com.ve/beisbol/mlb/estadisticas";
 			$crawler = $client->request('GET', $url);
@@ -241,7 +240,7 @@ class Baseball extends Service
 			);
 
 			$response = new Response();
-			$response->setCache("month");
+			$response->setCache("week");
 			$response->setResponseSubject("MLB");
 			$response->createFromTemplate("showLeagueInfo.tpl", $responseContent);
 		}
