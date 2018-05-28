@@ -1,12 +1,11 @@
 <center>
 <h1>Juegos del d&iacute;a: {$fecha}</h1>
-{space10}
 {if $juegosEnCurso > 0}
 	<h2>Juegos en curso</h2>
 	<table style="text-align:center" width="100%">
 		<tr>
-			<th><h2>Entrada</h2></th>
-			<th><h2>Local</h2></th>
+			<th><strong>Entrada</strong></th>
+			<th><strong>Local</strong></th>
 			<th></th>
 			<th><h2>Visitante</h2></th>
 			<th colspan="3"><h2>Resultado</h2></th>
@@ -30,21 +29,19 @@
 			{/strip}
 		{/foreach}
 	</table>
-	{space15}
 {/if}
 {if $juegosProgramados > 0}
-	<h2>Juegos programados para el d&iacute;a</h2>
 	<table style="text-align:center" width="100%">
 		<tr>
-			<th><h2>Juego</h2></th>
-			<th><h2>Hora</h2></th>
+			<th><strong>Juego</strong></th>
+			<th><strong>Hora</strong></th>
 		</tr>
 		{foreach from=$games item=game name=fila} <!-- por cada row -->
 			{strip}
 			{if $game['type'] == 'Programado para hoy'}
 				<tr>
-					<td>{$game['game']}</td>
-					<td>{$game['gameHour']}</td>
+					<td align="left">{$game['game']}</td>
+					<td width="30%">{$game['gameHour']}</td>
 				</tr>
 			{/if}
 			{/strip}
