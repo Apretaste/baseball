@@ -242,9 +242,106 @@ class Baseball extends Service
 			$response = new Response();
 			$response->setCache("week");
 			$response->setResponseSubject("MLB");
-			$response->createFromTemplate("showLeagueInfo.tpl", $responseContent);
+			$response->createFromTemplate("showLeagueInfoMlb.tpl", $responseContent);
 		}
 
+		return $response;
+	}
+
+	public function _cubana(Request $request)
+	{
+		$response = new Response();
+		$datos = explode(" ", $request->query);
+		$tipoConsulta = $datos[0];
+		$dato1 = (isset($datos[1])) ? $datos[1] : "";
+		// Setup crawler
+		$client = new Client();
+
+		if (strtoupper($tipoConsulta) == "JORNADA"){
+			$response = new Response();
+			$response->setResponseSubject("No disponible");
+			$response->createFromText("Aun no añadimos la jornada de esta liga, en un futuro la añadiremos!");
+		}
+		elseif (strtoupper($tipoConsulta) == "LIGA"){
+			$crawler = $client->request('GET', 'http://www.beisbolencuba.com/series');
+			$serieEnCuba=$crawler->filter('#modcontent > div:nth-child(1) > div:nth-child(4) > h2 > a');
+			$tituloSerieCuba=$serieEnCuba->text();
+			$linkSerieCuba=$serieEnCuba->attr('href');
+			$crawler=$client->request('GET', 'http://www.beisbolencuba.com'.$linkSerieCuba);
+			$etapas=array();
+
+			$crawler->filter('div.stages')->each(function($item, $i) use (&$etapas,&$client,&$tableStats){
+				$tituloEtapa = $item->filter('h3.h3a > a')->text();
+				$tableStats=array();
+				$crawler2=$client->request('GET', 'http://www.beisbolencuba.com'.$item->filter('div.menustage > a:nth-child(3)')->attr('href'));
+				$row=0;
+				$crawler2->filter('table.stats:first-of-type > tr')->each(function($item, $i) use (&$tableStats,&$row){
+					$tableStats[] = $row;
+					$tableStats[$row]=array();
+					$item->filter('td, th')->each(function($item, $i) use (&$tableStats,&$actual,$row){
+						$text=$item->text();
+						$text=str_replace("RACHA","R",$text);
+						$text=str_replace("Homeclub","HOME",$text);
+						$text=str_replace("Visitador","VIS",$text);
+						$tableStats[$row][] = $text;
+					});
+				$row++;
+				});
+				$etapas[]=['tituloEtapa' => $tituloEtapa,
+									 'tablaEtapa' => $tableStats];
+			});
+			$dataCuba=['titulo' => $tituloSerieCuba,
+								 'etapas' => $etapas];
+
+			$crawler = $client->request('GET', 'http://www.beisbolencuba.com/series');
+			$torneoInternac=$crawler->filter('#modcontent > div:nth-child(4) > div:nth-child(2) > h2 > a');
+			$tituloIntenac=$torneoInternac->text();
+			$linkInternac=$torneoInternac->attr('href');
+			$crawler=$client->request('GET', 'http://www.beisbolencuba.com'.$linkInternac);
+			$etapas=array();
+
+			$crawler->filter('div.stages')->each(function($item, $i) use (&$etapas, &$client){
+				$tituloEtapa= $item->filter('h3.h3a > a')->text();
+				$tableStats=array();
+				$crawler2=$client->request('GET', 'http://www.beisbolencuba.com'.$item->filter('div.menustage > a:nth-child(3)')->attr('href'));
+				$row=0;
+				$crawler2->filter('table.stats > tr')->each(function($item, $i) use (&$tableStats,&$row){
+					$tableStats[] = $row;
+					$tableStats[$row]=array();
+					$item->filter('td, th')->each(function($item, $i) use (&$tableStats,&$actual,$row){
+						$text=$item->text();
+						$text=str_replace("RACHA","R",$text);
+						$text=str_replace("Homeclub","HOME",$text);
+						$text=str_replace("Visitador","VIS",$text);
+						$tableStats[$row][] = $text;
+					});
+				$row++;
+				});
+				$etapas[]=['tituloEtapa' => $tituloEtapa,
+									 'tablaEtapa' => $tableStats];
+			});
+			$dataInternacional=['titulo' => $tituloIntenac,
+								 					'etapas' => $etapas];
+			$ligas=[$dataCuba,$dataInternacional];
+			$response = new Response();
+			$response->setCache("week");
+			$response->setResponseSubject("Liga Cubana");
+			$response->createFromTemplate("showLeagueInfoCuba.tpl", array('ligas' => $ligas));
+		}
+		elseif (strtoupper($tipoConsulta) == "NOTICIAS"){
+			$crawler=$client->request('GET','http://www.diariodecuba.com/search/node/neno+diaz?filters=uid%3A5653');
+			$noticias=array();
+			$crawler->filter('div.search-result')->each(function($item, $i) use (&$noticias,$crawler){
+				$noticia=['titulo' => $item->filter('h1.search-title > a')->text(),
+									'descripcion' => $item->filter('p.search-snippet')->text(),
+								  'link' => substr($item->filter('h1.search-title > a')->attr('href'),27)];
+				$noticias[]=$noticia;
+			});
+			$response = new Response();
+			$response->setCache("8");
+			$response->setResponseSubject("Liga Cubana");
+			$response->createFromTemplate("NoticiasBaseballCuba.tpl", array('noticias' => $noticias));
+		}
 		return $response;
 	}
 
