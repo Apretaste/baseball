@@ -158,7 +158,7 @@ class Baseball extends Service
 			);
 
 			$response = new Response();
-			$response->setCache("month");
+			$response->setCache("720");
 			$response->setResponseSubject("Juegos del " . $dato1);
 			$response->createFromTemplate("showDateGames.tpl", $responseContent);
 		}
@@ -240,7 +240,7 @@ class Baseball extends Service
 			);
 
 			$response = new Response();
-			$response->setCache("week");
+			$response->setCache("720");
 			$response->setResponseSubject("MLB");
 			$response->createFromTemplate("showLeagueInfoMlb.tpl", $responseContent);
 		}
@@ -324,7 +324,7 @@ class Baseball extends Service
 								 					'etapas' => $etapas];
 			$ligas=[$dataCuba,$dataInternacional];
 			$response = new Response();
-			$response->setCache("week");
+			$response->setCache("720");
 			$response->setResponseSubject("Liga Cubana");
 			$response->createFromTemplate("showLeagueInfoCuba.tpl", array('ligas' => $ligas));
 		}
@@ -338,7 +338,7 @@ class Baseball extends Service
 				$noticias[]=$noticia;
 			});
 			$response = new Response();
-			$response->setCache("8");
+			$response->setCache("480");
 			$response->setResponseSubject("Liga Cubana");
 			$response->createFromTemplate("NoticiasBaseballCuba.tpl", array('noticias' => $noticias));
 		}
