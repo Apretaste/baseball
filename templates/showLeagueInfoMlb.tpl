@@ -11,22 +11,22 @@
 	{/if}
 	<table style="text-align:center" width="100%" border="1">
 		<tr>
-		{for $i=1+($n-1)*11 to 12+($n-1)*11}
-			{if $i==1+($n-1)*11}
+		{for $i=1+($n-1)*12 to 13+($n-1)*12}
+			{if $i==1+($n-1)*12}
 				<th width="40px"><strong>{$ligas['firstColum'][($n-1)*6]}</strong></th>
 			{else}
-				{if $i-2-($n-1)*11==4}
+				{if $i-2-($n-1)*12==4}
 					<th width="30px"><strong>LOC</strong></th>
 				{else}
-					<th width="40px"><strong>{$ligas['headers'][$i-2-($n-1)*11]}</strong></th>
+					<th width="40px"><strong>{$ligas['headers'][$i-2-($n-1)*12]}</strong></th>
 				{/if}
 			{/if}
 		{/for}
 		</tr>
 		{for $j=1+($n-1)*5 to 5+($n-1)*5}
 			<tr>
-				{for $i=(0+($j-1)*11) to (11+($j-1)*11)}
-					{if $i==($j-1)*11}
+				{for $i=(0+($j-1)*12) to (12+($j-1)*12)}
+					{if $i==($j-1)*12}
 						<td><font size="2">{$ligas['firstColum'][$j+($n-1)]}</font></td>
 					{else}
 						<td><font size="2">{$ligas['data'][$i-1]}</font></td>
