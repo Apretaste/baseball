@@ -5,3 +5,9 @@ function formatDate(dateStr) {
   var day = date.getDate().toString().padStart(2, '0');
   return day + '/' + month + '/' + year;
 }
+
+function tomorrowDate(){
+	var date = new Date(Date.now());
+	date.setDate(date.getDate()+1);
+	return date;
+}
