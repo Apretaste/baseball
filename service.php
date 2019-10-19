@@ -7,8 +7,7 @@
 use Goutte\Client;
 use Symfony\Component\DomCrawler\Crawler;
 
-class BaseballService extends ApretasteService
-{
+class BaseballService extends ApretasteService {
 	public $apiFD = null;
 
 	/**
@@ -18,24 +17,21 @@ class BaseballService extends ApretasteService
 	 *
 	 * @return Response
 	 * */
-	public function _main()
-	{
-		if (empty($this->request->query) || (strtolower($this->request->query) != 'liga') || (strtolower($this->request->query) != 'jornada') || (strtolower($this->request->query) != 'equipo')) {
+	public function _main() {
+		if (empty($this->request->query) || (strtolower($this->request->query)!='liga') || (strtolower($this->request->query)!='jornada') || (strtolower($this->request->query)!='equipo')) {
 			$response = new Response();
 			$this->response->setCache("day");
-			$this->response->setResponseSubject("¿Cual liga deseas consultar?");
 			$this->response->setTemplate("selectLiga.ejs", ["ligas" => []]);
 
 			return $response;
 		}
 	}
 
-	public function _mlb()
-	{
+	public function _mlb() {
 		$response = new Response();
 		$datos = explode(" ", $this->request->query);
 		$tipoConsulta = $datos[0];
-		$dato1 = (isset($datos[1])) ? $datos[1] : "";
+		$dato1 = (isset($datos[1])) ? $datos[1]:"";
 		$games = null;
 		$juegosEnCurso = 0;
 		$juegosProgramados = 0;
@@ -44,7 +40,7 @@ class BaseballService extends ApretasteService
 		// Setup crawler
 		$client = new Client();
 
-		if (strtoupper($tipoConsulta) == "JORNADA") {
+		if (strtoupper($tipoConsulta)=="JORNADA") {
 			$url = "http://scoresline.com/scores.asp?F=MLB&Date=".$dato1;
 			$crawler = $client->request('GET', $url);
 
@@ -77,8 +73,8 @@ class BaseballService extends ApretasteService
 						// entonces es la table de Games Later Today
 						$type = "Programado para hoy";
 						$gameHour = $terceraCelda->text();
-						$game = (isset($tds[3])) ? $tds[3]->text() : "";
-						$gameProbs = (isset($tds[4])) ? $tds[4]->text() : "";
+						$game = (isset($tds[3])) ? $tds[3]->text():"";
+						$gameProbs = (isset($tds[4])) ? $tds[4]->text():"";
 						$awayTeam = "--";
 						$awayTeamScore = "--";
 						$homeTeam = "--";
@@ -90,10 +86,10 @@ class BaseballService extends ApretasteService
 							//es la tabla de Final Scores para la fecha
 							$type = "Resultado Final";
 							$awayTeam = $terceraCelda->text();
-							$awayTeamScore = (isset($tds[3])) ? $tds[3]->text() : "";
-							$homeTeam = (isset($tds[4])) ? $tds[4]->text() : "";
-							$homeTeamScore = (isset($tds[5])) ? $tds[5]->text() : "";
-							$inning = (isset($tds[6])) ? preg_replace('/[^0-9A-Za-z\s]+/', '', $tds[6]->text()) : "";
+							$awayTeamScore = (isset($tds[3])) ? $tds[3]->text():"";
+							$homeTeam = (isset($tds[4])) ? $tds[4]->text():"";
+							$homeTeamScore = (isset($tds[5])) ? $tds[5]->text():"";
+							$inning = (isset($tds[6])) ? preg_replace('/[^0-9A-Za-z\s]+/', '', $tds[6]->text()):"";
 							$inning = preg_replace("/PreviewLinesRecapBox/", "", $inning);
 							$inning = preg_replace("/PreviewLinesBox/", "", $inning);
 							$inning = preg_replace("/OU\s[0-9]{1,}/", "", $inning);
@@ -105,11 +101,11 @@ class BaseballService extends ApretasteService
 							if (preg_match('/[0-9]{3}/', $terceraCelda->text())) {//los 3 digitos de Rotation
 								//es un juego en curso
 								$type = "En curso";
-								$awayTeam = (isset($tds[3])) ? $tds[3]->text() : "";
-								$awayTeamScore = (isset($tds[4])) ? $tds[4]->text() : "";
-								$homeTeam = (isset($tds[5])) ? $tds[5]->text() : "";
-								$homeTeamScore = (isset($tds[6])) ? $tds[6]->text() : "";
-								$inning = (isset($tds[7])) ? $tds[7]->text() : "";
+								$awayTeam = (isset($tds[3])) ? $tds[3]->text():"";
+								$awayTeamScore = (isset($tds[4])) ? $tds[4]->text():"";
+								$homeTeam = (isset($tds[5])) ? $tds[5]->text():"";
+								$homeTeamScore = (isset($tds[6])) ? $tds[6]->text():"";
+								$inning = (isset($tds[7])) ? $tds[7]->text():"";
 								$gameHour = "--";
 								$game = "--";
 								$gameProbs = "--";
@@ -159,9 +155,8 @@ class BaseballService extends ApretasteService
 
 			$response = new Response();
 			$this->response->setCache("720");
-			$this->response->setResponseSubject("Juegos del ".$dato1);
 			$this->response->setTemplate("showDateGames.ejs", $responseContent);
-		} elseif (strtoupper($tipoConsulta) == "LIGA") {
+		} elseif (strtoupper($tipoConsulta)=="LIGA") {
 			$url = "http://www.espn.com.ve/beisbol/mlb/posiciones";
 			$crawler = $client->request('GET', $url);
 			$titulo = $crawler->filter('section > div.mb5.flex.justify-between.items-center > h1')->text();
@@ -210,7 +205,7 @@ class BaseballService extends ApretasteService
 					$tds = [];
 					$item->filter("td")->each(function ($item, $i) use (&$tds) {
 						$contenido = $item->text();
-						if ($contenido != "Lista Completa") {
+						if ($contenido!="Lista Completa") {
 							$tds[] = $contenido;
 						}
 					});
@@ -241,27 +236,24 @@ class BaseballService extends ApretasteService
 
 			$response = new Response();
 			$this->response->setCache("720");
-			$this->response->setResponseSubject("MLB");
 			$this->response->setTemplate("showLeagueInfoMlb.ejs", $responseContent);
 		}
 
 		return $response;
 	}
 
-	public function _cubana()
-	{
+	public function _cubana() {
 		$response = new Response();
 		$datos = explode(" ", $this->request->query);
 		$tipoConsulta = $datos[0];
-		$dato1 = (isset($datos[1])) ? $datos[1] : "";
+		$dato1 = (isset($datos[1])) ? $datos[1]:"";
 		// Setup crawler
 		$client = new Client();
 
-		if (strtoupper($tipoConsulta) == "JORNADA") {
+		if (strtoupper($tipoConsulta)=="JORNADA") {
 			$response = new Response();
-			$this->response->setResponseSubject("No disponible");
-			$this->response->createFromText("Aun no añadimos la jornada de esta liga, en un futuro la añadiremos!");
-		} elseif (strtoupper($tipoConsulta) == "LIGA") {
+			$this->simpleMessage("Servicio no disponible","Aun no añadimos la jornada de esta liga, en un futuro la añadiremos!");
+		} elseif (strtoupper($tipoConsulta)=="LIGA") {
 			$crawler = $client->request('GET', 'http://www.beisbolencuba.com/series');
 			$serieEnCuba = $crawler->filter('#modcontent > div:nth-child(1) > div:nth-child(4) > h2 > a');
 			$tituloSerieCuba = $serieEnCuba->text();
@@ -332,9 +324,8 @@ class BaseballService extends ApretasteService
 			$ligas = [$dataCuba, $dataInternacional];
 			$response = new Response();
 			$this->response->setCache("720");
-			$this->response->setResponseSubject("Liga Cubana");
 			$this->response->setTemplate("showLeagueInfoCuba.ejs", ['ligas' => $ligas]);
-		} elseif (strtoupper($tipoConsulta) == "NOTICIAS") {
+		} elseif (strtoupper($tipoConsulta)=="NOTICIAS") {
 			$crawler = $client->request('GET', 'http://www.diariodecuba.com/search/node/neno+diaz?filters=uid%3A5653');
 			$noticias = [];
 			$crawler->filter('div.search-result')->each(function ($item, $i) use (&$noticias, $crawler) {
@@ -347,15 +338,13 @@ class BaseballService extends ApretasteService
 			});
 			$response = new Response();
 			$this->response->setCache("480");
-			$this->response->setResponseSubject("Liga Cubana");
 			$this->response->setTemplate("NoticiasBaseballCuba.ejs", ['noticias' => $noticias]);
 		}
 
 		return $response;
 	}
 
-	private function miGetText($texto)
-	{
+	private function miGetText($texto) {
 		$texto = preg_replace('/\s\(.[0-9]{3}\)/', '', $texto);
 		$texto = preg_replace('/Top/', 'Alta', $texto);
 		$texto = preg_replace('/Bottom/', 'Baja', $texto);
@@ -420,8 +409,7 @@ class BaseballService extends ApretasteService
 		return $texto;
 	}
 
-	private function file_get_contents_curl($url)
-	{
+	private function file_get_contents_curl($url) {
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_HEADER, 0);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
