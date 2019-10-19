@@ -17,7 +17,7 @@ class BaseballService extends ApretasteService {
 	 *
 	 **/
 	public function _main() {
-		$this->response->setLayout('baseball');
+		$this->response->setLayout('baseball.ejs');
 
 		if (empty($this->request->input->data->query) || (strtolower($this->request->input->data->query)!='liga') || (strtolower($this->request->input->data->query)!='jornada') || (strtolower($this->request->input->data->query)!='equipo')) {
 			$this->response->setCache("day");
@@ -151,7 +151,7 @@ class BaseballService extends ApretasteService {
 				"games"             => $games
 			];
 
-			$this->response->setLayout('baseball');
+			$this->response->setLayout('baseball.ejs');
 			$this->response->setCache("720");
 			$this->response->setTemplate("showDateGames.ejs", $responseContent);
 		} elseif (strtoupper($tipoConsulta)=="LIGA") {
@@ -232,7 +232,7 @@ class BaseballService extends ApretasteService {
 				"tests"        => print_r($leagueStats, true)
 			];
 
-			$this->response->setLayout('baseball');
+			$this->response->setLayout('baseball.ejs');
 			$this->response->setCache("720");
 			$this->response->setTemplate("showLeagueInfoMlb.ejs", $responseContent);
 		}
@@ -318,7 +318,7 @@ class BaseballService extends ApretasteService {
 				'etapas' => $etapas
 			];
 			$ligas = [$dataCuba, $dataInternacional];
-			$this->response->setLayout('baseball');
+			$this->response->setLayout('baseball.ejs');
 			$this->response->setCache("720");
 			$this->response->setTemplate("showLeagueInfoCuba.ejs", ['ligas' => $ligas]);
 		} elseif (strtoupper($tipoConsulta)=="NOTICIAS") {
@@ -332,7 +332,7 @@ class BaseballService extends ApretasteService {
 				];
 				$noticias[] = $noticia;
 			});
-			$this->response->setLayout('baseball');
+			$this->response->setLayout('baseball.ejs');
 			$this->response->setCache("480");
 			$this->response->setTemplate("NoticiasBaseballCuba.ejs", ['noticias' => $noticias]);
 		}
