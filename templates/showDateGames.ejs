@@ -1,0 +1,184 @@
+<div class="row">
+  <div class="col s12 l12 m12 x12">
+    <h1>Juegos del d&iacute;a:
+        <%= fecha %>
+    </h1>
+  </div>
+</div>
+<% if (juegosEnCurso > 0) { %>
+    <div class="row">
+    <div class="col s12 l12 m12 x12">
+      <h2>Juegos en curso</h2>
+    </div>
+   </div>
+    <div class="row">
+      <div class="col s12 l12 m12 x12">
+          <table style="text-align:center" width="100%">
+        <tr>
+          <th><strong>Entrada</strong></th>
+          <th><strong>Local</strong></th>
+          <th></th>
+          <th>Visitante</th>
+          <th colspan="3">Resultado</th>
+        </tr>
+              <% for(var i = 0; i < games.length; i++) {
+                  var game = games[i]; %>
+
+              <% if (game.type == 'En curso' ) { %>
+                  <tr>
+            <td>
+            <%= game.inning %>
+            </td>
+            <td>
+            <%= game.homeTeam %>
+            </td>
+            <td>-</td>
+            <td>
+            <%= game.awayTeam %>
+            </td>
+            <td>
+            <b>
+              <%= game.homeTeamScore %>
+            </b>
+            </td>
+            <td>
+            <b>:</b>
+            </td>
+            <td>
+            <b>
+              <%= game.awayTeamScore %>
+            </b>
+            </td>
+          </tr>
+                  <tr>
+            <td colspan="7">
+            <small>
+              <font color="blue" size="1">
+              <%= game.gameStatus %>
+              </font>
+            </small>
+            </td>
+          </tr>
+              <% } %>
+              <% } %>
+          </table>
+    </div>
+  </div>
+<% } %>
+<% if (juegosProgramados > 0) { %>
+    <div class="row">
+        <div class="col s12 l12 m12 x12">
+          <table style="text-align:center" width="100%">
+            <tr>
+              <th>
+                <strong>Juego</strong>
+              </th>
+              <th>
+                <strong>Hora</strong>
+              </th>
+            </tr>
+              <% for(var i = 0; i < games.length; i++) {
+                  var game = games[i]; %>
+              <!-- por cada row -->
+              <% if (game.type == 'Programado para hoy') { %>
+                  <tr>
+            <td align="left">
+            <%= game.game %>
+            </td>
+            <td width="30%">
+            <%= game.gameHour %>
+            </td>
+          </tr>
+              <% } %>
+              <% } %>
+          </table>
+        </div>
+      </div>
+<% } %>
+<% if (juegosTerminados > 0) { %>
+    <div class="row">
+    <div class="col s12 l12 m12 x12">
+          <h2>Resultados finales</h2>
+    </div>
+  </div>
+    <div class="row">
+        <div class="col s12 l12 m12 x12">
+    <table style="text-align:center" width="100%">
+                <tr>
+                  <th>
+                    <div class="row">
+                      <div class="col s12 l12 m12 x12">
+                        <h2>Entrada</h2>
+                      </div>
+                    </div>
+                  </th>
+                  <th>
+                    <div class="row">
+                      <div class="col s12 l12 m12 x12">
+                        <h2>Local</h2>
+                      </div>
+                    </div>
+                  </th>
+                  <th>
+                  </th>
+                  <th>
+                    <div class="row">
+                      <div class="col s12 l12 m12 x12">
+                        <h2>Visitante</h2>
+                      </div>
+                    </div>
+                  </th>
+                  <th colspan="3">
+                    <div class="row">
+                      <div class="col s12 l12 m12 x12">
+                        <h2>Resultado</h2>
+                      </div>
+                    </div>
+                  </th>
+                </tr>
+        <% for(var i = 0; i < games.length; i++) {
+            var game = games[i]; %>
+        <!-- por cada row -->
+        <% if (game.type == 'Resultado Final') { %>
+            <tr>
+                      <td>
+                        <%= game.inning %>
+                      </td>
+                      <td>
+                        <%= game.homeTeam %>
+                      </td>
+                      <td>-</td>
+                      <td>
+                        <%= game.awayTeam %>
+                      </td>
+                      <td>
+                        <b>
+                          <%= game.homeTeamScore %>
+                        </b>
+                      </td>
+                      <td>
+                        <b>:</b>
+                      </td>
+                      <td>
+                        <b>
+                          <%= game.awayTeamScore %>
+                        </b>
+                      </td>
+                    </tr>
+        <% } %>
+        <% } %>
+    </table>
+            </div>
+          </div>
+<% } %>
+<div class="row">
+  <div class="col s12 l12 m12 x12">
+  <table style="text-align:center;" width="100%">
+    <tr>
+    <td style="" colspan="1">
+      <a class="btn" href="#!" onclick="apretaste.send({command: 'BASEBALL MLB', data: {query: 'LIGA'}});">Ver Liga</a>
+    </td>
+    </tr>
+  </table>
+  </div>
+</div>

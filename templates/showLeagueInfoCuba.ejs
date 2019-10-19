@@ -1,0 +1,118 @@
+<div class="row">
+  <div class="col s12 l12 m12 x12">
+    <h1>Liga Cubana -<%= formatDate(Date.now()) %></h1>
+  </div>
+</div>
+
+<% for(var x=0; x < ligas.length; x++) { var liga = ligas[x]; %>
+  <div class="row">
+    <div class="col s12 l12 m12 x12">
+      <h2><%= liga.titulo %></h2>
+    </div>
+  </div>
+  <% for(var i = 0; i < liga.etapas.length; i++) { var etapa = liga[i]; %>
+    <div class="row">
+      <div class="col s12 l12 m12 x12">
+        <table style="text-align:center" width="100%" border="1">
+          <tr>
+            <td colspan="13">
+              <div class="row">
+                <div class="col s12 l12 m12 x12">
+                  <h2 style="margin:0;">
+                    <%= etapa.tituloEtapa %>
+                  </h2>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <%= var nfila = 0 %>
+          <% for(var j=0; j < etapa.tablaEtapa.length; j++) { var fila = etapa.tablaEtapa[j]; %>
+            <tr>
+              <%= var ncol = 0 %>
+              <% for(var k=0; k < fila.length; k++) { var columna = file[k]; %>
+                <% if (columna.length > 2 && ncol == 0) { %>
+                  <%= nfila = 0 %>
+                <% } %>
+                <% if (nfila==0 && ncol==0) { %>
+                  <td font-size="2" colspan="2">
+                    <strong><%= columna %></strong>
+                  </td>
+                <% } else if(nfila == 0) { %>
+                  <td font-size="2">
+                    <strong><%= columna %></strong>
+                  </td>
+                <% } else { %>
+                  <td font-size="2">
+                    <%= columna %>
+                  </td>
+                <% } %>
+                <%= ncol++; %>
+              <% } %>
+              <%= nfila++; %>
+            </tr>
+          <% } %>
+        </table>
+      </div>
+    </div>
+  <% } %>
+<% } %>
+
+<div class="row">
+  <div class="col s12 l12 m12 x12">
+    <table style="text-align:center" width="100%">
+      <tr>
+        <td>
+          <font size="2"><b>JJ:</b>Juegos Jugados</font>
+        </td>
+        <td>
+          <font size="2"><b>AVE:</b>Promedio de Victorias</font>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <font size="1"><b>JG:</b>Juegos Ganados</font>
+        </td>
+        <td>
+          <font size="1"><b>JP:</b>Juegos Perdidos</font>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <font size="1"><b>VIS</b>Visitador</font>
+        </td>
+        <td>
+          <font size="1"><b>HOME:</b>Homeclub</font>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <font size="1"><b>CA:</b>Carreras Anotadas</font>
+        </td>
+        <td>
+          <font size="1"><b>CP:</b>Carreras Permitidas</font>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <font size="1"><b>DIF:</b>Diferencia</font>
+        </td>
+        <td>
+          <font size="1"><b>R:</b>Racha actual</font>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2"><b>CDIF:</b>Diferencia de Carreras</font>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col s6 l6 m6 x6">
+    <a class="btn" href="#!" onclick="apretaste.send({command: 'BASEBALL CUBANA', data: {query:_'NOTICIAS'}});">Noticias</a>
+  </div>
+  <div class="col s6 l6 m6 x6">
+    <a class="btn" href="#!" onclick="apretaste.send({command: 'BASEBALL'});">Ligas</a>
+  </div>
+</div>
