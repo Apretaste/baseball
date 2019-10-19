@@ -40,16 +40,16 @@
 				<% } %>
 			<% } %>
 			</tr>
-			<% for(j = 1 + (n - 1) * 5; j <= 5 + (n - 1) * 5; j++) { %>
+			<% for(var j = 1 + (n - 1) * 5; j <= 5 + (n - 1) * 5; j++) { %>
 				<tr>
-					<% for(var i = ((j - 1) * 12); i<= (12 + (j - 1) * 12); j++) { %>
-						<% if (i == (j - 1) * 12) { %>
+					<% for(var k = ((j - 1) * 12); k<= (12 + (j - 1) * 12); k++) { %>
+						<% if (k == (j - 1) * 12) { %>
 						<td>
 							<font size="2"><%= ligas.firstColum[j + (n - 1)] %></font>
 						</td>
 						<% } else { %>
 						<td>
-							<font size="2"><%= ligas.data[i - 1] %></font>
+							<font size="2"><%= ligas.data[k - 1] %></font>
 						</td>
 						<% } %>
 					<% } %>
@@ -142,7 +142,7 @@
         <div class="row">
           <div class="col s12 l12 m12 x12">
             <table width="100%" border="0" style="margin-left:20%;">
-				<% for ($j=0; j<=5; j++) { var tr = tableStat[j]; %>
+				<% for (var j=0; j<=5; j++) { var tr = tableStat[j]; %>
               <tr>
                 <% for(var k=0; k < tr.length; k++) {
                   var td = tr[k];
