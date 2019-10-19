@@ -18,18 +18,15 @@ class BaseballService extends ApretasteService {
 	 * @return Response
 	 * */
 	public function _main() {
-		if (empty($this->request->query) || (strtolower($this->request->query)!='liga') || (strtolower($this->request->query)!='jornada') || (strtolower($this->request->query)!='equipo')) {
-			$response = new Response();
+		if (empty($this->request->input->data->query) || (strtolower($this->request->input->data->query)!='liga') || (strtolower($this->request->input->data->query)!='jornada') || (strtolower($this->request->input->data->query)!='equipo')) {
 			$this->response->setCache("day");
 			$this->response->setTemplate("selectLiga.ejs", ["ligas" => []]);
-
-			return $response;
 		}
 	}
 
 	public function _mlb() {
-		$response = new Response();
-		$datos = explode(" ", $this->request->query);
+
+		$datos = explode(" ", $this->request->input->data->query);
 		$tipoConsulta = $datos[0];
 		$dato1 = (isset($datos[1])) ? $datos[1]:"";
 		$games = null;
@@ -144,7 +141,7 @@ class BaseballService extends ApretasteService {
 			});
 
 			$responseContent = [
-				"request"           => $this->request->query,
+				"request"           => $this->request->input->data->query,
 				"tipoConsulta"      => $tipoConsulta,
 				"fecha"             => $dato1,
 				"juegosEnCurso"     => $juegosEnCurso,
@@ -153,7 +150,7 @@ class BaseballService extends ApretasteService {
 				"games"             => $games
 			];
 
-			$response = new Response();
+
 			$this->response->setCache("720");
 			$this->response->setTemplate("showDateGames.ejs", $responseContent);
 		} elseif (strtoupper($tipoConsulta)=="LIGA") {
@@ -225,7 +222,7 @@ class BaseballService extends ApretasteService {
 
 
 			$responseContent = [
-				"request"      => $this->request->query,
+				"request"      => $this->request->input->data->query,
 				"tipoConsulta" => $tipoConsulta,
 				"titulo"       => $titulo,
 				"nombresLigas" => $nombresLigas,
@@ -234,7 +231,7 @@ class BaseballService extends ApretasteService {
 				"tests"        => print_r($leagueStats, true)
 			];
 
-			$response = new Response();
+
 			$this->response->setCache("720");
 			$this->response->setTemplate("showLeagueInfoMlb.ejs", $responseContent);
 		}
@@ -243,15 +240,15 @@ class BaseballService extends ApretasteService {
 	}
 
 	public function _cubana() {
-		$response = new Response();
-		$datos = explode(" ", $this->request->query);
+
+		$datos = explode(" ", $this->request->input->data->query);
 		$tipoConsulta = $datos[0];
 		$dato1 = (isset($datos[1])) ? $datos[1]:"";
 		// Setup crawler
 		$client = new Client();
 
 		if (strtoupper($tipoConsulta)=="JORNADA") {
-			$response = new Response();
+
 			$this->simpleMessage("Servicio no disponible","Aun no añadimos la jornada de esta liga, en un futuro la añadiremos!");
 		} elseif (strtoupper($tipoConsulta)=="LIGA") {
 			$crawler = $client->request('GET', 'http://www.beisbolencuba.com/series');
@@ -322,7 +319,7 @@ class BaseballService extends ApretasteService {
 				'etapas' => $etapas
 			];
 			$ligas = [$dataCuba, $dataInternacional];
-			$response = new Response();
+
 			$this->response->setCache("720");
 			$this->response->setTemplate("showLeagueInfoCuba.ejs", ['ligas' => $ligas]);
 		} elseif (strtoupper($tipoConsulta)=="NOTICIAS") {
@@ -336,12 +333,10 @@ class BaseballService extends ApretasteService {
 				];
 				$noticias[] = $noticia;
 			});
-			$response = new Response();
+
 			$this->response->setCache("480");
 			$this->response->setTemplate("NoticiasBaseballCuba.ejs", ['noticias' => $noticias]);
 		}
-
-		return $response;
 	}
 
 	private function miGetText($texto) {
@@ -407,19 +402,5 @@ class BaseballService extends ApretasteService {
 		$texto = preg_replace('/Washington/', 'Washington Nationals', $texto);
 
 		return $texto;
-	}
-
-	private function file_get_contents_curl($url) {
-		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_HEADER, 0);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-		curl_setopt($ch, CURLOPT_URL, $url);
-		$data = curl_exec($ch);
-		curl_close($ch);
-
-		return $data;
 	}
 }
