@@ -228,8 +228,7 @@ class BaseballService extends ApretasteService {
 				"titulo"       => $titulo,
 				"nombresLigas" => $nombresLigas,
 				"ligas"        => $ligas,
-				"leagueStats"  => $leagueStats,
-				"tests"        => print_r($leagueStats, true)
+				"leagueStats"  => $leagueStats
 			];
 
 			$this->response->setLayout('baseball.ejs');
