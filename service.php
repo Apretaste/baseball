@@ -178,8 +178,10 @@ class BaseballService extends ApretasteService {
 				$data[] = $item->text();
 			});
 			for ($i = 0; $i < 36; $i += 6) {
-				$firstColum[$i] = str_replace("LIGA AMERICANA", "LA", $firstColum[$i]);
-				$firstColum[$i] = str_replace("LIGA NACIONAL", "LN", $firstColum[$i]);
+				if (isset($firstColum[$i])) {
+					$firstColum[$i] = str_replace("LIGA AMERICANA", "LA", $firstColum[$i]);
+					$firstColum[$i] = str_replace("LIGA NACIONAL", "LN", $firstColum[$i]);
+				}
 			}
 			$ligas = [
 				'firstColum' => $firstColum,
