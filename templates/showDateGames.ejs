@@ -1,10 +1,25 @@
 <div class="row">
-  <div class="col s12 l12 m12 x12">
-    <h1>Juegos del d&iacute;a:
-        <%= fecha %>
-    </h1>
-  </div>
+	<div class="col s12 center">
+		<img src="{{APP_SERVICE_PATH}}/images/MLB.png">
+		<h1>Major League Baseball</h1>
+		<p>
+            MLB - <%= fecha %>
+            <br>
+			<img class="flag" src="{{APP_RESOURCES}}/images/flags/us.png"/> USA
+		</p>
+	</div>
 </div>
+
+<ul class="tabs tabs-fixed-width">
+    <li class="tab"><a class="active" href="#!" onclick="apretaste.send({command: 'BASEBALL MLB', data: {query: 'jornada <%= formatDate(Date.now()) %>'}});">Jornada Actual</a></li>
+    <li class="tab"><a href="#!" onclick="apretaste.send({command: 'BASEBALL MLB', data: {query: 'jornada <%= formatDate(tomorrowDate()) %>'}});">Pr&oacute;xima Jornada</a></li>
+</ul>
+
+<div class="row">
+  <div class="col s12 l12 m12 x12">
+      <h1>Juegos del d&iacute;a</h1>
+</div>
+
 <% if (juegosEnCurso > 0) { %>
     <div class="row">
     <div class="col s12 l12 m12 x12">
@@ -171,14 +186,9 @@
             </div>
           </div>
 <% } %>
-<div class="row">
-  <div class="col s12 l12 m12 x12">
-  <table style="text-align:center;" width="100%">
-    <tr>
-    <td style="" colspan="1">
-      <a class="btn" href="#!" onclick="apretaste.send({command: 'BASEBALL MLB', data: {query: 'LIGA'}});">Ver Liga</a>
-    </td>
-    </tr>
-  </table>
-  </div>
+
+<div class="fixed-action-btn">
+    <a class="btn-floating btn-large waves-effect waves-light green" href="#!" onclick="apretaste.send({command: 'BASEBALL MLB', data: {query: 'LIGA'}});">
+        <i class="material-icons">arrow_back</i>
+    </a>
 </div>
