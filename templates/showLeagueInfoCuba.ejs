@@ -17,6 +17,7 @@
     </div>
   </div>
   <% for(var i = 0; i < liga.etapas.length; i++) { var etapa = liga[i]; %>
+  <% if (!etapa) continue; %>
     <div class="row">
       <div class="col s12 l12 m12 x12">
         <table style="text-align:center" width="100%" border="1">
@@ -31,7 +32,7 @@
               </div>
             </td>
           </tr>
-          <% var nfila = 0 %>
+          <% var nfila = 0; %>
           <% for(var j=0; j < etapa.tablaEtapa.length; j++) { var fila = etapa.tablaEtapa[j]; %>
             <tr>
               <% var ncol = 0 %>
