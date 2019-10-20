@@ -11,7 +11,7 @@
             var noticia = noticias[i];
         %>
         <p>
-        <b><a href="#!" onclick="apretaste.send({command: 'DDC HISTORIA', data:{query: '<%= noticia.link %>'}});">
+        <b><a href="#!" onclick="apretaste.send({command: 'DDC HISTORIA', data:{query: '<%= noticia.link %>', title:'<%= noticia.titulo %>'}});">
             <%= noticia.titulo %></a></b>
         </p>
         <p align="justify"><%= noticia.descripcion.substr(0, 200) %>...</p>
