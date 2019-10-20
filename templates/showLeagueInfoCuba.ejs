@@ -36,7 +36,7 @@
           <% for(var j=0; j < etapa.tablaEtapa.length; j++) { var fila = etapa.tablaEtapa[j]; %>
             <tr>
               <% var ncol = 0 %>
-              <% for(var k=0; k < fila.length; k++) { var columna = file[k]; %>
+              <% for(var k=0; k < fila.length; k++) { var columna = fila[k]; %>
                 <% if (columna.length > 2 && ncol == 0) { %>
                   <% nfila = 0 %>
                 <% } %>
