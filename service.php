@@ -25,6 +25,24 @@ class BaseballService extends ApretasteService {
 		}
 	}
 
+	/**
+	MLB
+
+	Scores: http://site.api.espn.com/apis/site/v2/sports/baseball/mlb/scoreboard
+
+	News: http://site.api.espn.com/apis/site/v2/sports/baseball/mlb/news
+
+	All Teams: http://site.api.espn.com/apis/site/v2/sports/baseball/mlb/teams
+
+	Specific Team: http://site.api.espn.com/apis/site/v2/sports/baseball/mlb/teams/:team
+	 *
+	 */
+
+	public function getData($url) {
+		$jsonData = Utils::file_get_contents_curl($url);
+		return @json_decode($jsonData);
+	}
+
 	public function _mlb() {
 
 		$datos = explode(" ", $this->request->input->data->query);
@@ -39,6 +57,11 @@ class BaseballService extends ApretasteService {
 		$client = new Client();
 
 		if (strtoupper($tipoConsulta)=="JORNADA") {
+
+			// score board
+			//$data = $this->getData('http://site.api.espn.com/apis/site/v2/sports/baseball/mlb/scoreboard');
+
+
 			$url = "http://scoresline.com/scores.asp?F=MLB&Date=".$dato1;
 			$crawler = $client->request('GET', $url);
 
@@ -159,22 +182,22 @@ class BaseballService extends ApretasteService {
 			$crawler = $client->request('GET', $url);
 			$titulo = $crawler->filter('section > div.mb5.flex.justify-between.items-center > h1')->text();
 			$nombresLigas = [];
-			$crawler->filter("div.Table2__Title")->each(function ($item, $i) use (&$nombresLigas) {
+			$crawler->filter("div.Table__Title")->each(function ($item, $i) use (&$nombresLigas) {
 				$nombresLigas[] = $item->text();
 			});
 
 			$firstColum = [];
-			$crawler->filter("tbody.Table2__tbody tr td span:not(.hide-mobile):not(.stat-cell):not(.subHeader__item--content):not(.TeamLink__Logo):not(.arrow-icon_cont)")->each(function ($item, $i) use (&$firstColum) {
+			$crawler->filter("tbody.Table__tbody tr td span:not(.hide-mobile):not(.stat-cell):not(.subHeader__item--content):not(.TeamLink__Logo):not(.arrow-icon_cont)")->each(function ($item, $i) use (&$firstColum) {
 				$firstColum[] = strtoupper($item->text());
 			});
 
 			$headers = [];
-			$crawler->filter("tbody.Table2__tbody span.subHeader__item--content")->each(function ($item, $i) use (&$headers) {
+			$crawler->filter("tbody.Table__tbody span.subHeader__item--content")->each(function ($item, $i) use (&$headers) {
 				$headers[] = $item->text();
 			});
 
 			$data = [];
-			$crawler->filter("tbody.Table2__tbody span.stat-cell")->each(function ($item, $i) use (&$data) {
+			$crawler->filter("tbody.Table__tbody span.stat-cell")->each(function ($item, $i) use (&$data) {
 				$data[] = $item->text();
 			});
 			for ($i = 0; $i < 36; $i += 6) {
@@ -403,4 +426,6 @@ class BaseballService extends ApretasteService {
 
 		return $texto;
 	}
+
+
 }
