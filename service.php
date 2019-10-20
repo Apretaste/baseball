@@ -351,7 +351,7 @@ class BaseballService extends ApretasteService {
 				$noticia = [
 					'titulo'      => $item->filter('h1.search-title > a')->text(),
 					'descripcion' => $item->filter('p.search-snippet')->text(),
-					'link'        => substr($item->filter('h1.search-title > a')->attr('href'), 27)
+					'link'        => $item->filter('h1.search-title > a')->attr('href')
 				];
 				$noticias[] = $noticia;
 			});
