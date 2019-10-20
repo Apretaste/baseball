@@ -1,8 +1,20 @@
 <div class="row">
+	<div class="col s12 center">
+		<img src="{{APP_SERVICE_PATH}}/images/MLB.png">
+		<h1>Major League Baseball</h1>
+		<p>
+			<br>
+			<img class="flag" src="{{APP_RESOURCES}}/images/flags/USA.png"/> España
+		</p>
+	</div>
+</div>
+
+<div class="row">
   <div class="col s12 l12 m12 x12">
     <h1>MLB - <%= formatDate(Date.now()) %></h1>
   </div>
 </div>
+
 <% for(var n = 1; n < 7; n++) { %>
 	<% if (n==1) { %>
   		<div class="row">
