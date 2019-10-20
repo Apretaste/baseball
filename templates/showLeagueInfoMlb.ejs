@@ -141,13 +141,13 @@
         if(tableStat) { %>
         <div class="row">
           <div class="col s12 l12 m12 x12">
-            <table width="100%" border="0" style="margin-left:20%;">
+            <table width="100%" border="0">
 				<% for (var j=0; j < tableStat.length; j++) { var tr = tableStat[j]; %>
               <tr>
                 <% for(var k=0; k < tr.length; k++) {
                   var td = tr[k];
                   if (k==0) { %>
-                    <th align="left" width="30%">
+                    <th align="left">
                       <strong>
                         <%= td %>
                       </strong>

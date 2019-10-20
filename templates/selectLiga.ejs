@@ -1,43 +1,38 @@
 <div class="row">
-  <div class="col s12 l12 m12 x12">
-    <h1>¿Cual liga deseas consultar?</h1>
-  </div>
+	<div class="col s12">
+		<h1>Ligas de Baseball</h1>
+	</div>
 </div>
+
 <div class="row">
   <div class="col s12 l12 m12 x12">
-    <table style="text-align:center;" width="100%">
-      <tr>
-        <th>
-          <h2>Liga</h2>
-        </th>
-        <th>
-          <h2>Jornada Actual</h2>
-        </th>
-        <th>
-          <h2>M&aacute;s informaci&oacute;n</h2>
-        </th>
-      </tr>
-      <tr>
-        <td style="font-weight: bold;">Major League Baseball</td>
-        <td style="">
-          <a href="#!" onclick="apretaste.send({command: 'BASEBALL MLB', data: {query: 'jornada'}});">Juegos de hoy</a></td>
-        <td style="" colspan="1">
-          <a class="btn" href="#!" onclick="apretaste.send({command: 'BASEBALL MLB', data:{query: 'LIGA'}});">Ver Liga</a>
-        </td>
-      </tr>
-      <tr>
-        <td style="font-weight: bold;">Liga Cubana</td>
-        <td style="">
-          <a href="#!" onclick="apretaste.send({command: 'BASEBALL CUBANA', data: {query: 'jornada'}});">Juegos de hoy</a></td>
-        <td style="" colspan="1">
-          <a class="btn" href="#!" onclick="apretaste.send({command: 'BASEBALL CUBANA', data: {query: 'LIGA'}});">Ver Liga</a>
-        </td>
-      </tr>
-      <tr>
-        <td colspan="4">
-          <small>&iexcl;Proximamente las ligas del caribe!</small>
-        </td>
-      </tr>
-    </table>
+     <div class="card horizontal">
+          <div class="card-image">
+              <img src="{{APP_SERVICE_PATH}}/images/">
+          </div>
+          <div class="card-stacked">
+              <div class="card-content">
+                  <span class="card-title grey-text text-darken-4">Major League Baseball</span>
+              </div>
+              <div class="card-action">
+                  <a href="#!" onclick="apretaste.send({command: 'BASEBALL MLB', data: {query: 'jornada'}});">Juegos de hoy</a>
+                  <a class="btn" href="#!" onclick="apretaste.send({command: 'BASEBALL MLB', data:{query: 'LIGA'}});">Ver Liga</a>
+              </div>
+          </div>
+      </div>
+      <div class="card horizontal">
+          <div class="card-image">
+              <img src="{{APP_SERVICE_PATH}}/images/">
+          </div>
+          <div class="card-stacked">
+              <div class="card-content">
+                  <span class="card-title grey-text text-darken-4">Liga Cubana</span>
+              </div>
+              <div class="card-action">
+                  <a href="#!" onclick="apretaste.send({command: 'BASEBALL CUBANA', data: {query: 'jornada'}});">Juegos de hoy</a></td>
+                  <a class="btn" href="#!" onclick="apretaste.send({command: 'BASEBALL CUBANA', data: {query: 'LIGA'}});">Ver Liga</a>
+              </div>
+          </div>
+      </div>
   </div>
 </div>
