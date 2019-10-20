@@ -187,17 +187,17 @@ class BaseballService extends ApretasteService {
 			});
 
 			$firstColum = [];
-			$crawler->filter("tbody.Table__tbody tr td span:not(.hide-mobile):not(.stat-cell):not(.subHeader__item--content):not(.TeamLink__Logo):not(.arrow-icon_cont)")->each(function ($item, $i) use (&$firstColum) {
+			$crawler->filter("tbody.Table__TBODY tr td span:not(.hide-mobile):not(.stat-cell):not(.subHeader__item--content):not(.TeamLink__Logo):not(.arrow-icon_cont)")->each(function ($item, $i) use (&$firstColum) {
 				$firstColum[] = strtoupper($item->text());
 			});
 
 			$headers = [];
-			$crawler->filter("tbody.Table__tbody span.subHeader__item--content")->each(function ($item, $i) use (&$headers) {
+			$crawler->filter("tbody.Table__TBODY span.subHeader__item--content")->each(function ($item, $i) use (&$headers) {
 				$headers[] = $item->text();
 			});
 
 			$data = [];
-			$crawler->filter("tbody.Table__tbody span.stat-cell")->each(function ($item, $i) use (&$data) {
+			$crawler->filter("tbody.Table__TBODY span.stat-cell")->each(function ($item, $i) use (&$data) {
 				$data[] = $item->text();
 			});
 			for ($i = 0; $i < 36; $i += 6) {
