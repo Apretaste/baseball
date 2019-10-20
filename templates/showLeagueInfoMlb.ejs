@@ -163,5 +163,5 @@
         </div>
         <% } %>
           <% } %>
-    <a class="btn" href="#!" onclick="apretaste.send({command: 'BASEBALL MLB jornada <%= formatDate(Date.now()) %>'});">Jornada Actual</a>
-    <a class="btn" href="#!" onclick="apretaste.send({command: 'BASEBALL MLB jornada <%= formatDate(tomorrowDate()) %>'});">Pr&oacute;xima Jornada</a>
+    <a class="btn" href="#!" onclick="apretaste.send({command: 'BASEBALL MLB', data: {query: 'jornada <%= formatDate(Date.now()) %>'}});">Jornada Actual</a>
+    <a class="btn" href="#!" onclick="apretaste.send({command: 'BASEBALL MLB', data: {query: 'jornada <%= formatDate(tomorrowDate()) %>'}});">Pr&oacute;xima Jornada</a>

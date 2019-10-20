@@ -1,10 +1,8 @@
-
 <div class="row">
 	<div class="col s12 l12 m12 x12">
-		<h1><%= titulo %></h1>	</div>
+		<h1><%= titulo %></h1>
+	</div>
 </div>
-
-
 
 <div class="row">
 	<div class="col s12 l12 m12 x12">
@@ -28,10 +26,10 @@
 		<h2>Resultado</h2>	</div>
 </div></th>
 	</tr>
-	<% for(var i=0; i < fixture.length; i++) {var juego %>
-		
+	<% for(var i=0; i < fixture.length; i++) {var juego = fixture[i]; %>
+
 		<tr>
-			<td><%= juego.date|date_format:"%d/%m/%Y" %></td>
+			<td><%= formatDate(juego.date) %></td>
 			<td><%= juego.homeTeamName %></td>
 			<td>-</td>
 			<td><%= juego.awayTeamName %></td>
@@ -39,9 +37,10 @@
 			<td><b>:</b></td>
 			<td><b><%= juego.result.goalsAwayTeam %></b></td>
 		</tr>
-		
+
 	<% } %>
-</table>	</div>
+		</table>
+	</div>
 </div>
 
 
@@ -51,9 +50,10 @@
 		<table style="text-align:center;" width="100%">
 	<tr>
 		<td style="" colspan="1">
-			<a class="btn" href="#!" onclick="apretaste.send({command: 'FUTBOL LIGA <%= liga.payload.id %>" >Ver Liga</a>  %>
+			<a class="btn" href="#!" onclick="apretaste.send({command: 'FUTBOL LIGA', data: {query: '<%= liga.payload.id %>'}});">Ver Liga</a>
 		</td>
 	</tr>
-</table>	</div>
+	</table>
+	</div>
 </div>
 
