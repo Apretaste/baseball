@@ -31,13 +31,13 @@
               </div>
             </td>
           </tr>
-          <%= var nfila = 0 %>
+          <% var nfila = 0 %>
           <% for(var j=0; j < etapa.tablaEtapa.length; j++) { var fila = etapa.tablaEtapa[j]; %>
             <tr>
-              <%= var ncol = 0 %>
+              <% var ncol = 0 %>
               <% for(var k=0; k < fila.length; k++) { var columna = file[k]; %>
                 <% if (columna.length > 2 && ncol == 0) { %>
-                  <%= nfila = 0 %>
+                  <% nfila = 0 %>
                 <% } %>
                 <% if (nfila==0 && ncol==0) { %>
                   <td font-size="2" colspan="2">
@@ -52,9 +52,9 @@
                     <%= columna %>
                   </td>
                 <% } %>
-                <%= ncol++; %>
+                <% ncol++; %>
               <% } %>
-              <%= nfila++; %>
+              <% nfila++; %>
             </tr>
           <% } %>
         </table>
