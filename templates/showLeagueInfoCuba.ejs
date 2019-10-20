@@ -1,7 +1,13 @@
 <div class="row">
-  <div class="col s12 l12 m12 x12">
-    <h1>Liga Cubana -<%= formatDate(Date.now()) %></h1>
-  </div>
+	<div class="col s12 center">
+		<img src="{{APP_SERVICE_PATH}}/images/SNB.png">
+		<h1>Serie Nacional de B&eacute;isbol</h1>
+		<p>
+            SNB - <%= formatDate(Date.now()) %>
+          <br>
+			<img class="flag" src="{{APP_RESOURCES}}/images/flags/cu.png"/> USA
+		</p>
+	</div>
 </div>
 
 <% for(var x=0; x < ligas.length; x++) { var liga = ligas[x]; %>
@@ -110,7 +116,7 @@
 
 <div class="row">
   <div class="col s6 l6 m6 x6">
-    <a class="btn" href="#!" onclick="apretaste.send({command: 'BASEBALL CUBANA', data: {query:_'NOTICIAS'}});">Noticias</a>
+    <a class="btn" href="#!" onclick="apretaste.send({command: 'BASEBALL CUBANA', data: {query: 'NOTICIAS'}});">Noticias</a>
   </div>
   <div class="col s6 l6 m6 x6">
     <a class="btn" href="#!" onclick="apretaste.send({command: 'BASEBALL'});">Ligas</a>

@@ -271,7 +271,6 @@ class BaseballService extends ApretasteService {
 		$client = new Client();
 
 		if (strtoupper($tipoConsulta)=="JORNADA") {
-
 			$this->simpleMessage("Servicio no disponible","Aun no añadimos la jornada de esta liga, en un futuro la añadiremos!");
 		} elseif (strtoupper($tipoConsulta)=="LIGA") {
 			$crawler = $client->request('GET', 'http://www.beisbolencuba.com/series');
