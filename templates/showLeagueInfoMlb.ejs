@@ -3,16 +3,11 @@
 		<img src="{{APP_SERVICE_PATH}}/images/MLB.png">
 		<h1>Major League Baseball</h1>
 		<p>
+            MLB - <%= formatDate(Date.now()) %>
 			<br>
-			<img class="flag" src="{{APP_RESOURCES}}/images/flags/USA.png"/> España
+			<img class="flag" src="{{APP_RESOURCES}}/images/flags/USA.png"/> USA
 		</p>
 	</div>
-</div>
-
-<div class="row">
-  <div class="col s12 l12 m12 x12">
-    <h1>MLB - <%= formatDate(Date.now()) %></h1>
-  </div>
 </div>
 
 <% for(var n = 1; n < 7; n++) { %>
@@ -32,7 +27,7 @@
 
 	<div class="row">
 	  <div class="col s12 l12 m12 x12">
-        <table style="text-align:center" width="100%" border="1">
+        <table class="table striped centered">
           <tr>
 			<% for (var i = 1 + (n - 1) * 12; i <= 13 +(n - 1) * 12; i++) { %>
 				<% if (i == 1 + (n - 1) * 12) { %>
