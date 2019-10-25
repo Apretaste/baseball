@@ -7,7 +7,8 @@
 use Goutte\Client;
 use Symfony\Component\DomCrawler\Crawler;
 
-class BaseballService extends ApretasteService {
+class BaseballService extends ApretasteService
+{
 	public $apiFD = null;
 
 	/**
@@ -16,8 +17,9 @@ class BaseballService extends ApretasteService {
 	 * @param Request
 	 *
 	 **/
-	public function _main() {
-		$this->response->setLayout('baseball.ejs');
+	public function _main()
+	{
+		//$this->response->setLayout('baseball.ejs');
 
 		if (empty($this->request->input->data->query) || (strtolower($this->request->input->data->query)!='liga') || (strtolower($this->request->input->data->query)!='jornada') || (strtolower($this->request->input->data->query)!='equipo')) {
 			$this->response->setCache("day");
@@ -38,13 +40,14 @@ class BaseballService extends ApretasteService {
 	 *
 	 */
 
-	public function getData($url) {
+	public function getData($url)
+	{
 		$jsonData = Utils::file_get_contents_curl($url);
 		return @json_decode($jsonData);
 	}
 
-	public function _mlb() {
-
+	public function _mlb()
+	{
 		$datos = explode(" ", $this->request->input->data->query);
 		$tipoConsulta = $datos[0];
 		$dato1 = (isset($datos[1])) ? $datos[1]:"";
@@ -174,7 +177,7 @@ class BaseballService extends ApretasteService {
 				"games"             => $games
 			];
 
-			$this->response->setLayout('baseball.ejs');
+			//$this->response->setLayout('baseball.ejs');
 			$this->response->setCache("720");
 			$this->response->setTemplate("showDateGames.ejs", $responseContent);
 		} elseif (strtoupper($tipoConsulta)=="LIGA") {
@@ -256,14 +259,14 @@ class BaseballService extends ApretasteService {
 				"leagueStats"  => $leagueStats
 			];
 
-			$this->response->setLayout('baseball.ejs');
+			//$this->response->setLayout('baseball.ejs');
 			$this->response->setCache("720");
 			$this->response->setTemplate("showLeagueInfoMlb.ejs", $responseContent);
 		}
 	}
 
-	public function _cubana() {
-
+	public function _cubana()
+	{
 		$datos = explode(" ", $this->request->input->data->query);
 		$tipoConsulta = $datos[0];
 		$dato1 = (isset($datos[1])) ? $datos[1]:"";
@@ -271,7 +274,7 @@ class BaseballService extends ApretasteService {
 		$client = new Client();
 
 		if (strtoupper($tipoConsulta)=="JORNADA") {
-			$this->simpleMessage("Servicio no disponible","Aun no añadimos la jornada de esta liga, en un futuro la añadiremos!");
+			$this->simpleMessage("Servicio no disponible", "Aun no añadimos la jornada de esta liga, en un futuro la añadiremos!");
 		} elseif (strtoupper($tipoConsulta)=="LIGA") {
 			$crawler = $client->request('GET', 'http://www.beisbolencuba.com/series');
 			$serieEnCuba = $crawler->filter('#modcontent > div:nth-child(1) > div:nth-child(4) > h2 > a');
@@ -341,7 +344,7 @@ class BaseballService extends ApretasteService {
 				'etapas' => $etapas
 			];
 			$ligas = [$dataCuba, $dataInternacional];
-			$this->response->setLayout('baseball.ejs');
+			//$this->response->setLayout('baseball.ejs');
 			$this->response->setCache("720");
 			$this->response->setTemplate("showLeagueInfoCuba.ejs", ['ligas' => $ligas]);
 		} elseif (strtoupper($tipoConsulta)=="NOTICIAS") {
@@ -355,13 +358,14 @@ class BaseballService extends ApretasteService {
 				];
 				$noticias[] = $noticia;
 			});
-			$this->response->setLayout('baseball.ejs');
+			//$this->response->setLayout('baseball.ejs');
 			$this->response->setCache("480");
 			$this->response->setTemplate("NoticiasBaseballCuba.ejs", ['noticias' => $noticias]);
 		}
 	}
 
-	private function miGetText($texto) {
+	private function miGetText($texto)
+	{
 		$texto = preg_replace('/\s\(.[0-9]{3}\)/', '', $texto);
 		$texto = preg_replace('/Top/', 'Alta', $texto);
 		$texto = preg_replace('/Bottom/', 'Baja', $texto);
@@ -425,6 +429,4 @@ class BaseballService extends ApretasteService {
 
 		return $texto;
 	}
-
-
 }
