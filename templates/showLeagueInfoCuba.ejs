@@ -20,20 +20,23 @@
   <% if (!etapa) continue; %>
     <div class="row">
       <div class="col s12 l12 m12 x12">
-        <table id ="datatable" class="table striped centered">
-          <tr>
-            <td colspan="13">
-              <div class="row">
-                <div class="col s12 l12 m12 x12">
-                  <h3 style="margin:0;">
-                    <%= etapa.tituloEtapa %>
-                  </h3>
+        <table id ="datatable" class="display compact" width="100%">
+          <thead>
+            <tr>
+              <td colspan="13">
+                <div class="row">
+                  <div class="col s12 l12 m12 x12">
+                    <h3 style="margin:0;">
+                      <%= etapa.tituloEtapa %>
+                    </h3>
+                  </div>
                 </div>
-              </div>
-            </td>
-          </tr>
+              </td>
+            </tr>
+          </thead>
           <% var nfila = 0; %>
           <% for(var j=0; j < etapa.tablaEtapa.length; j++) { var fila = etapa.tablaEtapa[j]; %>
+            <tbody>
             <tr>
               <% var ncol = 0 %>
               <% for(var k=0; k < fila.length; k++) { var columna = fila[k]; %>
@@ -58,6 +61,7 @@
               <% nfila++; %>
             </tr>
           <% } %>
+          </tbody>
         </table>
       </div>
     </div>
