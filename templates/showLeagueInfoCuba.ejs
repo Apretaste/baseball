@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col s12 center">
-		<img src="{{APP_SERVICE_PATH}}/images/SNB.png">
+		<img style="float:left;" src="{{APP_SERVICE_PATH}}/images/SNB.png">
 		<h1>Liga Cubana</h1>
 		<p>
             SNB - <%= formatDate(Date.now()) %>
@@ -20,7 +20,7 @@
   <% if (!etapa) continue; %>
     <div class="row">
       <div class="col s12 l12 m12 x12">
-         <h3 style="margin:0;"><%= etapa.tituloEtapa %></h3>
+         <h3 style="margin:0px; padding:5px; color: white; background: #57b23b;margin-bottom:4px;"><%= etapa.tituloEtapa %></h3>
         <table class="datatable display compact" width="100%">
           <% for(var j=0; j < etapa.tablaEtapa.length; j++) { var fila = etapa.tablaEtapa[j]; %>
            <% if(j == 0) { %>

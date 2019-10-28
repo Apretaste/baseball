@@ -6,4 +6,6 @@ div.dts{display:block !important}div.dts tbody th,div.dts tbody td{white-space:n
 td {
 	white-space:nowrap;
 	padding:0px;
+	border: 1px solid #eeeeee;
+	text-align: center;
 }
