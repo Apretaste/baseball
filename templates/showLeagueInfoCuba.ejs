@@ -23,25 +23,27 @@
          <h3 style="margin:0;"><%= etapa.tituloEtapa %></h3>
         <table class="datatable display compact" width="100%">
           <% for(var j=0; j < etapa.tablaEtapa.length; j++) { var fila = etapa.tablaEtapa[j]; %>
-            <tbody>
-            <tr>
-              <% for(var k=0; k < fila.length; k++) { var columna = fila[k]; %>
-                <% if (j==0 && k==0) { %>
-                  <td font-size="2" colspan="2">
-                    <strong><%= columna %></strong>
-                  </td>
-                <% } else if(j == 0) { %>
+           <% if(j == 0) { %>
+            <thead>
+              <tr>
+                <% for(var k=0; k < fila.length; k++) { var columna = fila[k]; %>
                   <td font-size="2">
                     <strong><%= columna %></strong>
-                  </td>
-                <% } else { %>
-                  <td font-size="2">
-                    <%= columna %>
                   </td>
                 <% } %>
+              </tr>
+              </thead>
+          <% } else { %>
+            <% if(j == 1) { %> <tbody> <% } %>
+            <tr>
+              <% for(var k=0; k < fila.length; k++) { var columna = fila[k]; %>
+                <td font-size="2">
+                  <%= columna %>
+                </td>
               <% } %>
             </tr>
           <% } %>
+         <% } %>
           </tbody>
         </table>
       </div>
