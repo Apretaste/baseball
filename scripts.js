@@ -234,9 +234,9 @@ function tomorrowDate(){
 
 
 $(function(){
-	$(".datatable").DataTable({
+	/*$(".datatable").DataTable({
 		scrollY:        200,
 		deferRender:    true,
 		scroller:       true
-	});
+	});*/
 });
