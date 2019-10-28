@@ -28,7 +28,7 @@
               <tr>
                 <% for(var k=0; k < fila.length; k++) { var columna = fila[k]; %>
 
-                  <% if(k == 0 || fila[1] == 'JJ') { %>
+                  <% if(k == 0) { %>
                     <td></td>
                   <% } %>
 
@@ -45,6 +45,10 @@
             <% if(j == 1) { %> <tbody> <% } %>
             <tr>
               <% for(var k=0; k < fila.length; k++) { var columna = fila[k]; %>
+
+              <% if(k == 0 && etapa.tablaEtapa[0].length > fila.length) { %>
+                <td></td>
+              <% } %>
 
                 <td font-size="2">
                   <%= columna %>
