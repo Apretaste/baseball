@@ -195,5 +195,5 @@ function tomorrowDate(){
 
 
 $(function(){
-	$("#datatable").DataTable();
+	$(".datatable").DataTable();
 });
