@@ -28,14 +28,14 @@
               <tr>
                 <% for(var k=0; k < fila.length; k++) { var columna = fila[k]; %>
 
-                  <% if(k == 0) { %>
+                  <% if(k == 0 || fila[1] == 'JJ') { %>
                     <td></td>
                   <% } %>
 
                   <td font-size="2">
                     <strong><%= columna %></strong>
                   </td>
-                  <% if (k == 4 || k == 8) { %>
+                  <% if (k == 5) { %>
                     </tr><tr><td></td><td></td>
                   <% } %>
                 <% } %>
@@ -50,7 +50,7 @@
                   <%= columna %>
                 </td>
 
-              <% if (k == 5 || k == 9) { %>
+              <% if (k == 6) { %>
                 </tr><tr><td></td><td></td>
               <% } %>
               <% } %>
