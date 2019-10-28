@@ -20,8 +20,8 @@
   <% if (!etapa) continue; %>
     <div class="row">
       <div class="col s12 l12 m12 x12">
-         <h3 style="width:100%;" class="btn" onclick="$('#etapa-<%= i %>').toggleClass('hidden');" ><%= etapa.tituloEtapa %></h3>
-        <table id = "etapa-<%= i %>" class="display compact hidden" width="100%">
+         <h3 style="width:100%;" class="btn" onclick="$('#etapa-<%= i %>').toggleClass('hide');" ><%= etapa.tituloEtapa %></h3>
+        <table id = "etapa-<%= i %>" class="display compact hide" width="100%">
           <% for(var j=0; j < etapa.tablaEtapa.length; j++) { var fila = etapa.tablaEtapa[j]; %>
            <% if(j == 0) { %>
             <thead>
