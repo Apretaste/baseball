@@ -35,6 +35,9 @@
                   <td font-size="2">
                     <strong><%= columna %></strong>
                   </td>
+                  <% if (k == 5 || k == 9) { %>
+                    </tr><tr><td></td><td></td>
+                  <% } %>
                 <% } %>
               </tr>
               </thead>
