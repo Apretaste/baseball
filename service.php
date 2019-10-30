@@ -54,7 +54,7 @@ class BaseballService extends ApretasteService
 
 	public function _mlbteams() {
 		$teams = $this->getData("http://site.api.espn.com/apis/site/v2/sports/baseball/mlb/teams");
-		$this->response->setTemplate("mlbTeams.ejs");
+		$this->response->setTemplate("mlbTeams.ejs", $teams);
 	}
 
 	/**
