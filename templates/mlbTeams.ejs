@@ -13,7 +13,7 @@
 			</div>
 			<div class="card-stacked">
 				<div class="card-content">
-                    <span style="color: white; background: #<%= team.color %>;padding:5px;"><%= team.abbreviation %></span>
+                    <span style="color: white; background: #<%= team.color %>;padding:5px;float:right;"><%= team.abbreviation %></span>
 					<span class="card-title grey-text text-darken-4" onclick="apretaste.send({command: 'BASEBALL MLBTEAM', data: {query: '<%= team.id %>'}});">
 						<%= team.displayName %>
 					</span>
