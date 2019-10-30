@@ -74,6 +74,15 @@ class BaseballService extends ApretasteService
 		$this->response->setTemplate("mlbNews.ejs", $news);
 	}
 
+	/**
+	 * Eventos - MLB
+	 */
+	public function _mlbevents()
+	{
+		$events = $this->getData("https://site.api.espn.com/apis/site/v2/sports/baseball/leagues?lang=es");
+		$this->response->setTemplate("mlbEvents.ejs", $events);
+	}
+
 	public function _mlb()
 	{
 		$scoreboard = $this->getData("http://site.api.espn.com/apis/site/v2/sports/baseball/mlb/scoreboard");
