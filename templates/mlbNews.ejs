@@ -1,0 +1,14 @@
+<div class="row">
+    <div class="col">
+        <h1>Noticias - MLB</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <% for(var i =0; i< articles.length; i++) { var article = articles[i]; %>
+        <a href="#" onclick="apretaste.send({command: 'WEB', data: {query: '<% article.links.web.href %>'}});"><% article.headline %></a>
+        <p><% article.description %></p>
+        <% } %>
+    </div>
+</div>

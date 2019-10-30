@@ -46,8 +46,22 @@ class BaseballService extends ApretasteService
 		return @json_decode($jsonData);
 	}
 
+	public function _mlbteam(){
+		$teamId = $this->request->input->data->query;
+		$team = $this->getData("http://site.api.espn.com/apis/site/v2/sports/baseball/mlb/teams/$teamId");
+
+	}
+
+	public function _mlbnews(){
+		$news = $this->getData("http://site.api.espn.com/apis/site/v2/sports/baseball/mlb/news?lang=es");
+		$this->response->setTemplate("mlbNews.ejs", $news);
+	}
 	public function _mlb()
 	{
+		$scoreboard = $this->getData("http://site.api.espn.com/apis/site/v2/sports/baseball/mlb/scoreboard");
+		$teams = $this->getData("http://site.api.espn.com/apis/site/v2/sports/baseball/mlb/teams");
+
+
 		$datos = explode(" ", $this->request->input->data->query);
 		$tipoConsulta = $datos[0];
 		$dato1 = (isset($datos[1])) ? $datos[1]:"";
