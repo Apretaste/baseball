@@ -13,13 +13,13 @@
 			</div>
 			<div class="card-stacked">
 				<div class="card-content">
+                    <span style="color: white; background: #<%= team.color %>;padding:5px;"><%= team.abbreviation %></span>
 					<span class="card-title grey-text text-darken-4" onclick="apretaste.send({command: 'BASEBALL MLBTEAM', data: {query: '<%= team.id %>'}});">
 						<%= team.displayName %>
 					</span>
 					<p>
-                        <i class="material-icons" style="color:#<%= team.color %>;">label</i>
-                        <i class="material-icons" style="color:#<%= team.alternateColor %>">label</i>
-                        <span><%= team.abbreviation %></span>
+                        <i class="material-icons" style="color:#<%= team.color %>; border: 1px solid #eee;">label</i>
+                        <i class="material-icons" style="color:#<%= team.alternateColor %>; border: 1px solid #eee;">label</i>
 					</p>
 				</div>
 				<div class="card-action">
