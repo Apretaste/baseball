@@ -46,16 +46,26 @@ class BaseballService extends ApretasteService
 		return @json_decode($jsonData);
 	}
 
-	public function _mlbteam(){
+	public function _mlbteam()
+	{
 		$teamId = $this->request->input->data->query;
 		$team = $this->getData("http://site.api.espn.com/apis/site/v2/sports/baseball/mlb/teams/$teamId");
-
 	}
 
-	public function _mlbnews(){
+	public function _mlbteams() {
+		$teams = $this->getData("http://site.api.espn.com/apis/site/v2/sports/baseball/mlb/teams");
+		$this->response->setTemplate("mlbTeams.ejs");
+	}
+
+	/**
+	 * Noticias - MLB
+	 */
+	public function _mlbnews()
+	{
 		$news = $this->getData("http://site.api.espn.com/apis/site/v2/sports/baseball/mlb/news?lang=es");
 		$this->response->setTemplate("mlbNews.ejs", $news);
 	}
+
 	public function _mlb()
 	{
 		$scoreboard = $this->getData("http://site.api.espn.com/apis/site/v2/sports/baseball/mlb/scoreboard");
@@ -194,7 +204,6 @@ class BaseballService extends ApretasteService
 			//$this->response->setLayout('baseball.ejs');
 			$this->response->setCache("720");
 			$this->response->setTemplate("showDateGames.ejs", $responseContent);
-
 		} elseif (strtoupper($tipoConsulta)=="LIGA") {
 			$url = "http://www.espn.com.ve/beisbol/mlb/posiciones";
 			$crawler = $client->request('GET', $url);
@@ -277,7 +286,6 @@ class BaseballService extends ApretasteService
 			//$this->response->setLayout('baseball.ejs');
 			$this->response->setCache("720");
 			$this->response->setTemplate("showLeagueInfoMlb.ejs", $responseContent);
-
 		}
 
 		Challenges::complete("view-baseball", $this->request->person->id);
