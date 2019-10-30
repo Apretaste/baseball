@@ -46,13 +46,21 @@ class BaseballService extends ApretasteService
 		return @json_decode($jsonData);
 	}
 
+	/**
+	 * Team MLB
+	 */
 	public function _mlbteam()
 	{
 		$teamId = $this->request->input->data->query;
 		$team = $this->getData("http://site.api.espn.com/apis/site/v2/sports/baseball/mlb/teams/$teamId");
+		$this->response->setTemplate("mlbTeam.ejs", $team);
 	}
 
-	public function _mlbteams() {
+	/**
+	 * Equpos - MLB
+	 */
+	public function _mlbteams()
+	{
 		$teams = $this->getData("http://site.api.espn.com/apis/site/v2/sports/baseball/mlb/teams");
 		$this->response->setTemplate("mlbTeams.ejs", $teams);
 	}
