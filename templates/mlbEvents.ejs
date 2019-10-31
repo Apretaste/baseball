@@ -12,7 +12,7 @@
                 <img src="{{APP_SERVICE_PATH}}/images/MLB_TEAM_<%= event.competitions[0].competitors[0].team.abbreviation %>.png">
             </a>
             vs
-            <a href ="apretaste.send({command: 'BASEBALL MLBTEAM', data: {query: '<%= event.comptetions[0].competitors[1].team.id %>'}});">
+            <a href ="apretaste.send({command: 'BASEBALL MLBTEAM', data: {query: '<%= event.competitions[0].competitors[1].team.id %>'}});">
                 <img src="{{APP_SERVICE_PATH}}/images/MLB_TEAM_<%= event.competitions[0].competitors[1].team.abbreviation %>.png">
             </a>
         </p>
