@@ -8,18 +8,16 @@
     <div class="col">
         <% for(var i =0; i< events.length; i++) { var event = events[i]; %>
         <p align="center">
-            <a href ="apretaste.send({command: 'BASEBALL MLBTEAM', data: {query: '<%= event.comptetions[0].competitors[0].team.id %>'}});">
-                <img src="{{APP_SERVICE_PATH}}/images/MLB_TEAM_<%= event.comptetions[0].competitors[0].team.abbreviation %>.png">
+            <a href ="apretaste.send({command: 'BASEBALL MLBTEAM', data: {query: '<%= event.competitions[0].competitors[0].team.id %>'}});">
+                <img src="{{APP_SERVICE_PATH}}/images/MLB_TEAM_<%= event.competitions[0].competitors[0].team.abbreviation %>.png">
             </a>
             vs
             <a href ="apretaste.send({command: 'BASEBALL MLBTEAM', data: {query: '<%= event.comptetions[0].competitors[1].team.id %>'}});">
-                <img src="{{APP_SERVICE_PATH}}/images/MLB_TEAM_<%= event.comptetions[0].competitors[1].team.abbreviation %>.png">
+                <img src="{{APP_SERVICE_PATH}}/images/MLB_TEAM_<%= event.competitions[0].competitors[1].team.abbreviation %>.png">
             </a>
         </p>
-
-        <a href="#" onclick="apretaste.send({command: 'WEB', data: {query: '<%= article.links.web.href %>'}});">
-         <%= event.shortName %></a>
-         <p><%= event.name %></p>
+        <h3><%= event.shortName %></h3>
+        <p><%= event.name %></p>
         <% } %>
     </div>
 </div>
