@@ -12,7 +12,7 @@
                 <a href ="apretaste.send({command: 'BASEBALL MLBTEAM', data: {query: '<%= event.competitions[0].competitors[0].team.id %>'}});">
                     <img class="responsive-img" src="{{APP_SERVICE_PATH}}/images/MLB_TEAM_<%= event.competitions[0].competitors[0].team.abbreviation %>.png">
                 </a>
-                <span>VS</span>
+                <span id="versus">VS</span>
             </div>
             <div class="col s6 l6 xl6 m6">
                 <a href ="apretaste.send({command: 'BASEBALL MLBTEAM', data: {query: '<%= event.competitions[0].competitors[1].team.id %>'}});">
