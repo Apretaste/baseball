@@ -33,7 +33,7 @@
                                  <table class="table striped">
                                      <thead>
                                          <tr><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td>
-                                             <% for (var s= 0; s <= competition.competitors[0].statistics.length; s++) { var stat = competitor.statistics[s]; %>
+                                             <% for (var s= 0; s <= competition.competitors[0].statistics.length; s++) { var stat = competition.competitors[0].statistics[s]; %>
                                              <td><%= stat.abbreviation %></td>
                                              <% } %>
                                          </tr>
