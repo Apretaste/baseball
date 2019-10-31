@@ -33,7 +33,7 @@
                                  <table class="table striped responsive-table">
                                      <% for(var k=0; k < competition.competitors.length; k++) { var competitor = competition.competitors[k]; %>
                                      <tr>
-                                        <% for (var l=0; l < competitor.linescores; l++) { %>
+                                        <% for (var l=0; l < competitor.linescores.length; l++) { %>
                                             <td><%= competitor.linescores[k].value %></td>
                                         <% } %>
                                      </tr>
