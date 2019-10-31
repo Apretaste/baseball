@@ -5,23 +5,32 @@
 </div>
 
 <div class="row">
-    <div class="col">
+    <div class="col l12 s12 md12 xl12">
         <% for(var i =0; i< events.length; i++) { var event = events[i]; %>
-        <div class="row">
-            <div class="col s6 l6 xl6 m6">
-                <a href ="apretaste.send({command: 'BASEBALL MLBTEAM', data: {query: '<%= event.competitions[0].competitors[0].team.id %>'}});">
-                    <img class="responsive-img" src="{{APP_SERVICE_PATH}}/images/MLB_TEAM_<%= event.competitions[0].competitors[0].team.abbreviation %>.png">
-                </a>
-                <span id="versus">VS</span>
-            </div>
-            <div class="col s6 l6 xl6 m6">
-                <a href ="apretaste.send({command: 'BASEBALL MLBTEAM', data: {query: '<%= event.competitions[0].competitors[1].team.id %>'}});">
-                    <img class="responsive-img" src="{{APP_SERVICE_PATH}}/images/MLB_TEAM_<%= event.competitions[0].competitors[1].team.abbreviation %>.png">
-                </a>
+        <div class="card horizontal">
+            <div class="card-stacked">
+                <div class="card-image">
+			    </div>
+                <div class="card-content">
+                    <div class="row" >
+                        <div class="col s6 l6 xl6 m6" style="text-align: center;">
+                            <a href ="apretaste.send({command: 'BASEBALL MLBTEAM', data: {query: '<%= event.competitions[0].competitors[0].team.id %>'}});">
+                                <img style="height:10rem;" class="responsive-img" src="{{APP_SERVICE_PATH}}/images/MLB_TEAM_<%= event.competitions[0].competitors[0].team.abbreviation %>.png">
+                            </a>
+                            <span id="versus">VS</span>
+                        </div>
+                        <div class="col s6 l6 xl6 m6" style="text-align: center;">
+                            <a href ="apretaste.send({command: 'BASEBALL MLBTEAM', data: {query: '<%= event.competitions[0].competitors[1].team.id %>'}});">
+                                <img style="height:10rem; class="responsive-img" src="{{APP_SERVICE_PATH}}/images/MLB_TEAM_<%= event.competitions[0].competitors[1].team.abbreviation %>.png">
+                            </a>
+                        </div>
+                    </div>
+                     <h3 align="center"><%= event.shortName %></h3>
+                     <p align="center"><%= event.name %></p>
+                </div>
             </div>
         </div>
-        <h3><%= event.shortName %></h3>
-        <p><%= event.name %></p>
+
         <% } %>
     </div>
 </div>
