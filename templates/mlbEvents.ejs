@@ -30,11 +30,11 @@
                                  <h3 align="center"><%= event.shortName %></h3>
                                  <p align="center"><%= event.name %></p>
                                  <p align="center"><%= competition.date %></p>
-                                 <table class="table striped responsive-table">
+                                 <table class="table striped">
                                      <% for(var k=0; k < competition.competitors.length; k++) { var competitor = competition.competitors[k]; %>
                                      <tr>
                                         <% for (var l=0; l < competitor.linescores.length; l++) { %>
-                                            <td><%= competitor.linescores[k].value %></td>
+                                            <td><%= competitor.linescores[l].value %></td>
                                         <% } %>
                                      </tr>
                                      <% } %>
