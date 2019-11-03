@@ -19,14 +19,14 @@
   <% for(var i = 0; i < liga.etapas.length; i++) { var etapa = liga.etapas[i]; %>
   <% if (!etapa) continue; %>
   <div class="row" style="padding-bottom: 0px; margin-bottom: 0px;">
-      <div class="col s12 l12 m12 x12" style="padding-bottom: 0px; margin-bottom: 0px;">
-        <p style="margin:0px; padding: 5px; width:100%;text-align: center; background: #eeeeee;" onclick="$('#etapa-<%= x %>-<%= i %>').toggleClass('hide');" ><%= etapa.tituloEtapa %></p>
+      <div class="col s12 l12 m12 x12" style="padding: 0px; margin-bottom: 0px;">
+        <p style="margin:0px; padding: 5px; width:100%;text-align: center; background: #eeeeee;font-size: 2rem;" onclick="$('#etapa-<%= x %>-<%= i %>').toggleClass('hide');" ><%= etapa.tituloEtapa %></p>
       </div>
   </div>
     <div class="row">
-      <div class="col s12 l12 m12 x12" style="overflow: auto;">
+      <div class="col s12 l12 m12 x12" style="overflow: auto;padding: 0px;">
 
-        <table id = "etapa-<%= x %>-<%= i %>" class="display compact striped" width="100%">
+        <table id = "etapa-<%= x %>-<%= i %>" class="display compact striped" width="100%" style="background: #C0EABD;">
           <% for(var j=0; j < etapa.tablaEtapa.length; j++) { var fila = etapa.tablaEtapa[j]; %>
            <% if(j == 0) { %>
             <thead>
