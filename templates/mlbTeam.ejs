@@ -24,8 +24,8 @@
         <h2>Eventos</h2>
         <% for (var i = 0; i < team.nextEvent.length; i++) { var event = team.nextEvent[i]; %>
             <%= event.name %>
-            <p><%=event.seasontType.name %> <%= event.season.displayName %></p>
-            <p><%=event.seasontType.date %></p>
+            <p><%=event.seasonType.name %> <%= event.season.displayName %></p>
+            <p><%=event.seasonType.date %></p>
 
             <% for(var j =0; j<  event.competitions.length; j++) { %>
                 <% var competition = event.competitions[j]; %>
