@@ -10,14 +10,15 @@
          <img src="{{APP_SERVICE_PATH}}/images/MLB.png" style="position: absolute;top: 5px;right: 5px;z-index: 0;height: 30%;opacity: 0.2;">
           <div class="card-stacked">
               <div class="card-content">
-                  <a href="#!" onclick="apretaste.send({command: 'BASEBALL MLB', data:{query: 'LIGA'}});">
+                  <a href="#!" onclick="apretaste.send({command: 'BASEBALL MLBTEAMS', data:{query: 'LIGA'}});">
                       <span class="card-title grey-text text-darken-4" style="font-weight: bold;width: 50%;">Major League Baseball</span>
                   </a>
                   <p><img class="flag" src="{{APP_RESOURCES}}/images/flags/us.png"/></p>
               </div>
               <div class="card-action">
-                  <a href="#!" onclick="apretaste.send({command: 'BASEBALL MLBTEAMS', data:{query: ''}});">EQUIPOS</a>
-                  <a href="#!" onclick="apretaste.send({command: 'BASEBALL MLBEVENTS', data: {query: 'jornada'}});">EVENTOS</a>
+                  <a href="#!" onclick="apretaste.send({command: 'BASEBALL MLBTEAMS', data:{query: ''}});">VER</a>
+                  <a href="#!" onclick="apretaste.send({command: 'BASEBALL MLB', data:{query: ''}});">L&Iacute;DERES</a>
+                  <a href="#!" onclick="apretaste.send({command: 'BASEBALL MLBEVENTS', data: {query: 'jornada'}});">JUEGOS</a>
                   <a href="#!" onclick="apretaste.send({command: 'BASEBALL MLBNEWS', data: {query: ''}});">NOTICIAS</a>
               </div>
           </div>

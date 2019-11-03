@@ -3,31 +3,35 @@
 		<img src="{{APP_SERVICE_PATH}}/images/MLB.png" style="float:left;">
 		<h3>Major League Baseball</h3>
 		<p>
-			<img class="flag" src="{{APP_RESOURCES}}/images/flags/us.png"/> USA
+			<img class="flag" src="{{APP_RESOURCES}}/images/flags/us.png"/>
 		</p>
 	</div>
 </div>
-
+<!--
 <ul class="tabs tabs-fixed-width">
     <li class="tab"><a href="#!" onclick="apretaste.send({command: 'BASEBALL MLB', data: {query: 'jornada <%= formatDate(Date.now()) %>'}});">Jornada Actual</a></li>
     <li class="tab"><a href="#!" onclick="apretaste.send({command: 'BASEBALL MLB', data: {query: 'jornada <%= formatDate(tomorrowDate()) %>'}});">Pr&oacute;xima Jornada</a></li>
 </ul>
-
+-->
 <% for(var n = 1; n < 7; n++) { %>
 	<% if (n==1) { %>
+    <!--
   		<div class="row">
     		<div class="col s12 l12 m12 x12">
 			  <h2><%= nombresLigas[0] %></h2>
 			</div>
   		</div>
+  		-->
 	<% } else if (n == 4) { %>
+    <!--
   		<div class="row">
     		<div class="col s12 l12 m12 x12">
       			<h2><%= nombresLigas[1] %></h2>
     		</div>
   		</div>
+  		-->
   	<% } %>
-
+<!--
 	<div class="row">
 	  <div class="col s12 l12 m12 x12">
         <table class="striped centered display compact hide ">
@@ -68,7 +72,9 @@
 		</table>
       </div>
     </div>
+      -->
 <% } %>
+<!--
     <div class="row">
       <div class="col s12 l12 m12 x12">
         <table style="text-align:center" width="100%">
@@ -141,6 +147,7 @@
         </table>
       </div>
     </div>
+    -->
     <div class="row">
       <div class="col s12 l12 m12 x12">
         <h2>L&iacute;deres de la MLB</h2>
