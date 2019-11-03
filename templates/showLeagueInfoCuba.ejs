@@ -19,7 +19,7 @@
   <% for(var i = 0; i < liga.etapas.length; i++) { var etapa = liga.etapas[i]; %>
   <% if (!etapa) continue; %>
     <div class="row">
-      <div class="col s12 l12 m12 x12">
+      <div class="col s12 l12 m12 x12" style="overflow: auto;">
          <h3 style="width:100%;" class="btn" onclick="$('#etapa-<%= x %>-<%= i %>').toggleClass('hide');" ><%= etapa.tituloEtapa %></h3>
         <table id = "etapa-<%= x %>-<%= i %>" class="display compact hide striped" width="100%">
           <% for(var j=0; j < etapa.tablaEtapa.length; j++) { var fila = etapa.tablaEtapa[j]; %>
@@ -35,7 +35,7 @@
                   <td font-size="2">
                     <strong><%= columna %></strong>
                   </td>
-                  <% if (k == 5) { %>
+                  <% if (k == 5 && false) { %>
                     </tr><tr><td></td><td></td>
                   <% } %>
                 <% } %>
@@ -60,7 +60,7 @@
                 <%= columna %>
               </td>
 
-              <% if (k == 6) { %>
+              <% if (k == 6 && false) { %>
                 </tr><tr><td></td><td></td>
               <% } %>
               <% } %>
