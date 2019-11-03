@@ -46,15 +46,17 @@
                              <h3 align="center"><%= event.shortName %></h3>
                              <p align="center"><%= event.name %></p>
                              <p align="center"><%= competition.date %></p>
-                             <p><%=event.seasonType.name %> <%= event.season.displayName %></p>
-
+                             <p align="center"><small><%=event.seasonType.name %> <%= event.season.displayName %></small></p>
+                             <hr/>
+                            <% if (competition.status.type.name == 'STATUS_FINAL') { %>
                              <% for(var i =0;i<competition.competitors.length; i++) { var competitor = competition.competitors[i]; %>
                                 <% if (competitor.winner) { %>
-                                <p>Ganado por <%= competitor.team.shortDisplayName %>, <%= competitor.score.value %> carreras a
-                                   <% } else { %>
-                                        <%= competitor.score.value %></p>
+                                   <p align="center">Ganado por <%= competitor.team.shortDisplayName %>, <%= competitor.score.value %> carreras a
+                                <% } else { %>
+                                    <%= competitor.score.value %></p>
                                 <% }%>
                              <% }%>
+                            <% } %>
                         </div>
                     </div>
                 </div>
