@@ -51,9 +51,9 @@
                             <% if (competition.status.type.name == 'STATUS_FINAL') { %>
                              <% for(var i =0;i<competition.competitors.length; i++) { var competitor = competition.competitors[i]; %>
                                 <% if (competitor.winner) { %>
-                                   <p align="center">Ganado por <%= competitor.team.shortDisplayName %>, <%= competitor.score.value %> carreras a
+                                    <p align="center">Ganado por <%= competitor.team.shortDisplayName %>, <%= competitor.score.value %> carreras </p>
                                 <% } else { %>
-                                    <%= competitor.score.value %></p>
+                                    <p align="center">Perdido por <%= competitor.team.shortDisplayName %>, <%= competitor.score.value %> carreras </p>
                                 <% }%>
                              <% }%>
                             <% } %>
