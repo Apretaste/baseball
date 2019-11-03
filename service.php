@@ -48,12 +48,15 @@ class BaseballService extends ApretasteService
 
 	/**
 	 * Team MLB
+	 *
+	 * @throws \Exception
 	 */
 	public function _mlbteam()
 	{
 		$teamId = $this->request->input->data->query;
 		$team = $this->getData("http://site.api.espn.com/apis/site/v2/sports/baseball/mlb/teams/$teamId");
 		$this->response->setTemplate("mlbTeam.ejs", $team);
+		Challenges::complete("view-baseball", $this->request->person->id);
 	}
 
 	/**
