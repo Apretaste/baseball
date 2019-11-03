@@ -23,10 +23,6 @@
     <div class="col">
         <h2>Eventos</h2>
         <% for (var i = 0; i < team.nextEvent.length; i++) { var event = team.nextEvent[i]; %>
-            <%= event.name %>
-            <p><%=event.seasonType.name %> <%= event.season.displayName %></p>
-            <p><%=event.seasonType.date %></p>
-
             <% for(var j =0; j<  event.competitions.length; j++) { %>
                 <% var competition = event.competitions[j]; %>
                 <div class="card horizontal">
@@ -50,6 +46,15 @@
                              <h3 align="center"><%= event.shortName %></h3>
                              <p align="center"><%= event.name %></p>
                              <p align="center"><%= competition.date %></p>
+                             <p><%=event.seasonType.name %> <%= event.season.displayName %></p>
+
+                             <% for(var i =0;i<competition.competitors.length; i++) { var competitor = competition.competitors[i]; %>
+                                <% if (competitor.winner) { %>
+                                <p>Ganado por <%= competitor.team.shortDisplayName %>, <%= competitor.score.value %> carreras a
+                                   <% } else { %>
+                                        <%= competitor.score.value %></p>
+                                <% }%>
+                             <% }%>
                         </div>
                     </div>
                 </div>
