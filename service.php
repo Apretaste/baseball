@@ -238,6 +238,27 @@ class BaseballService extends ApretasteService
 	}
 
 	/**
+	 * @throws \Exception
+	 */
+	public function _new()
+	{
+		$this->response->setTemplate("news.ejs", [
+			"league" => (object) [
+				"id" => 1,
+				"name" => "Grandes ligas",
+				"country" => "us",
+				"abbreviation" => "MLB"
+			],
+			"article" => [
+				(object) [
+					"title" =>  Utils::randomSentence(),
+					"description" => Utils::randomSentence(),
+					"href" => ""
+				],
+			]
+		]);
+	}
+	/**
 	MLB
 
 	Scores: http://site.api.espn.com/apis/site/v2/sports/baseball/mlb/scoreboard
