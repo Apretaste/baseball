@@ -120,7 +120,7 @@ class BaseballService extends ApretasteService
 
 	public function _team()
 	{
-		$this->response->setTemplate("teams.ejs", [
+		$this->response->setTemplate("team.ejs", [
 			"league" => (object) [
 				"id" => 1,
 				"name" => "Grandes ligas",
@@ -156,7 +156,7 @@ class BaseballService extends ApretasteService
 
 	public function player()
 	{
-		$this->response->setTemplate("team_records.ejs", [
+		$this->response->setTemplate("player.ejs", [
 			"player" => (object) [
 				"id" => 2,
 				"name" => "Pepe"
