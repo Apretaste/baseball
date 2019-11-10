@@ -251,8 +251,7 @@ class BaseballService extends ApretasteService
 			],
 			"article" => (object) [
 					"title" =>  Utils::randomSentence(),
-					"description" => Utils::randomSentence(),
-					"href" => ""
+					"body" => Utils::randomSentence()
 				],
 		]);
 	}
