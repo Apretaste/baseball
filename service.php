@@ -37,6 +37,9 @@ class BaseballService extends ApretasteService
 
 	public function _events()
 	{
+
+		$eventType = $this->request->input->data->type ?? 'past';
+
 		$events = [];
 		for ($i=0;$i<30;$i++) {
 			$events[] = (object)[
@@ -48,6 +51,7 @@ class BaseballService extends ApretasteService
 			];
 		}
 		$this->response->setTemplate("events.ejs", [
+			"eventsType" => $eventType,
 			"league" => (object) [
 				"id" => 1,
 				"name" => "Grandes ligas",
