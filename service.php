@@ -19,7 +19,6 @@ class BaseballService extends ApretasteService
 	 **/
 	public function _main()
 	{
-		$this->response->setCache("day");
 		$this->response->setTemplate("leagues.ejs", ["leagues" => [
 			(object) [
 				"id" => 1,
@@ -34,6 +33,29 @@ class BaseballService extends ApretasteService
 				"abbreviation" => "SNB"
 			]
 		]]);
+	}
+
+	public function _events()
+	{
+		$events = [];
+		for ($i=0;$i<30;$i++) {
+			$events[] = (object)[
+				"date" => "1/1/2020",
+				"home" => "ATL",
+				"visitor" => "BOS",
+				"home_score" => rand(1, 10),
+				"visitor_score" => rand(1, 10)
+			];
+		}
+		$this->response->setTemplate("events.ejs", [
+			"league" => (object) [
+				"id" => 1,
+				"name" => "Grandes ligas",
+				"country" => "us",
+				"abbreviation" => "MLB"
+			],
+			"events" => $events
+		]);
 	}
 
 	/**
@@ -485,5 +507,4 @@ class BaseballService extends ApretasteService
 
 		return $texto;
 	}
-
 }
