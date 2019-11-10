@@ -1,0 +1,20 @@
+<div class="row">
+    <div class="col">
+        <h1>Noticias - MLB</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <% for(var i =0; i< articles.length; i++) { var article = articles[i]; %>
+        <a href="#" onclick="apretaste.send({command: 'BASEBALL NEW', data: {href: '<%= article.href %>'}});"><%= article.title %></a>
+        <p><%= article.description %></p>
+        <% } %>
+    </div>
+</div>
+
+<div class="fixed-action-btn">
+    <a class="btn-floating btn-large waves-effect waves-light green" href="#!" onclick="apretaste.send({command: 'BASEBALL', data: {query: ''}});">
+        <i class="material-icons">arrow_back</i>
+    </a>
+</div>
