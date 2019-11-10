@@ -4,10 +4,16 @@
     </div>
 </div>
 
-<% for(i=0; i<players.length;i++) { var player = players[i]; %>
 <div class="row">
     <div class="col">
-        <%= player.name %>
+        <table class="striped">
+            <% for(i=0; i<players.length;i++) { var player = players[i]; %>
+            <tr>
+                <td>#<%= player.number %></td>
+                <td><%= player.name %></td>
+                <td><%= player.position %></td>
+            </tr>
+           <% } %>
+        </table>
     </div>
 </div>
-<% } %>

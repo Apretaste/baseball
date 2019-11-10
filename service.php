@@ -156,11 +156,18 @@ class BaseballService extends ApretasteService
 
 	public function _players()
 	{
+		$players = [];
+
+		for ($i = 0; $i<50; $i++) {
+			$players[] = (object)[
+				"number" => $i + 1,
+				"name" => "Pepe Gonzalez",
+				"position" => "Pitcher"
+			];
+		}
+
 		$this->response->setTemplate("players.ejs", [
-			"player" => (object) [
-				"id" => 2,
-				"name" => "Pepe"
-			]
+			"players" => $players
 		]);
 	}
 
