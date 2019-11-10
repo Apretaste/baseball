@@ -50,6 +50,7 @@ class BaseballService extends ApretasteService
 				"visitor_score" => rand(1, 10)
 			];
 		}
+
 		$this->response->setTemplate("events.ejs", [
 			"eventsType" => $eventType,
 			"league" => (object) [
@@ -62,6 +63,21 @@ class BaseballService extends ApretasteService
 		]);
 	}
 
+	public function _playerevents()
+	{
+		$eventType = $this->request->input->data->type ?? 'past';
+		$events = [];
+		$this->response->setTemplate("player.ejs", [
+			"tab" => "events",
+			"league" => (object) [
+				"id" => 1,
+				"name" => "Grandes ligas",
+				"country" => "us",
+				"abbreviation" => "MLB"
+			],
+			"events" => $events
+		]);
+	}
 
 	public function _event()
 	{
@@ -181,10 +197,41 @@ class BaseballService extends ApretasteService
 
 	public function _player()
 	{
+		$tab = $this->request->input->data->tab ?? 'profile';
+
+		$events = [];
+		for ($i=0;$i<30;$i++) {
+			$events[] = (object)[
+				"id" => $i,
+				"date" => "1/1/2020",
+				"home" => "ATL",
+				"visitor" => "BOS",
+				"home_score" => rand(1, 10),
+				"visitor_score" => rand(1, 10)
+			];
+		}
+
 		$this->response->setTemplate("player.ejs", [
+			"tab" => $tab,
 			"player" => (object) [
 				"id" => 2,
-				"name" => "Pepe"
+				"name" => "Sandy Alcantara",
+				"number" => 22,
+				"position" => "SP",
+				"team" => (object) [
+					"id" => 2,
+					"name" => "Miami Marlins",
+					"abbreviation" => "MIN",
+					"color" => "4455ff",
+					"alternate_color" => "4ff566"
+				],
+				"brithday" => "7/9/1995",
+				"experience" => "2 years"
+			],
+			"events" => $events,
+			"records" => [
+				(object) ["name" => "record 1", "value" => 12],
+				(object) ["name" => "record 2", "value" => 23]
 			]
 		]);
 	}

@@ -4,6 +4,60 @@
     </div>
 </div>
 
+<div class="row">
+	<div class="col s12">
+		<ul class="tabs tabs-fixed-width">
+            <li class="tab"><a href="#" onclick="apretaste.send({command: 'BASEBALL PLAYER', data:{tab: 'profile', id: <%= player.id %>,}})">Perfil</a></li>
+            <li class="tab"><a href="#" onclick="apretaste.send({command: 'BASEBALL PLAYER', data:{tab: 'records', id: <%= player.id %>,}})">Records</a></li>
+            <li class="tab"><a href="#" onclick="apretaste.send({command: 'BASEBALL PLAYER', data:{tab: 'events', id: <%= player.id %>}})">Juegos</a></li>
+        </ul>
+	</div>
+</div>
+
+<% if (tab == 'profile') { %>
+<div class="row">
+    <div class="col l12 m12 s12">
+        <h2>Profile</h2>
+        <p>#<%= player.number %>, <%= team.name %></p>
+        <p>Fecha de Nacimiento: <%= player.birthday %></p>
+        <p>Experiencie: <%= player.experience %></p>
+    </div>
+</div>
+<% } %>
+
+<% if (tab == 'records') { %>
+    <div class="row">
+    <div class="col l12 m12 s12">
+        <h2>Records</h2>
+        <table class="striped">
+            <% for(var i=0; i < records.length; i++) { var record = records[i]; %>
+            <tr>
+                <td><%= record.name %></td>
+                <td><%= record.value %></td>
+            </tr>
+            <% }%>
+        </table>
+    </div>
+</div>
+<% } %>
+
+<% if (tab == 'events') { %>
+    <div class="row">
+    <div class="col l12 m12 s12">
+        <h2>Juegos</h2>
+        <table class="striped">
+           <% for(var i=0; i < events.length; i++) { var event = events[i]; %>
+           <tr>
+                <td><%= event.date %></td>
+                <td><%= event.home %> (<%= event.home_score %>) vs <%= event.visitor %> (<%= event.visitor_score %>)</td>
+                <td><a href="#" onclick="apretaste.send({command: 'BASEBALL EVENT', data: {id: <%= event.id %>}});">ver</a></td>
+            </tr>
+           <% }%>
+       </table>
+    </div>
+</div>
+<% } %>
+
 <div class="fixed-action-btn">
     <a class="btn-floating btn-large waves-effect waves-light green" href="#!" onclick="apretaste.send({command: 'BASEBALL', data: {query: ''}});">
         <i class="material-icons">arrow_back</i>
