@@ -23,7 +23,9 @@
 					</p>
 				</div>
 				<div class="card-action">
-					<a href = "#!" onclick="apretaste.send({command: 'BASEBALL TEAM', data: {query: '<%= team.id %>'}});">Ver</a>
+					<a href = "#!" onclick="apretaste.send({command: 'BASEBALL TEAM', data: {id: '<%= team.id %>'}});">Ver</a>
+					<a href = "#!" onclick="apretaste.send({command: 'BASEBALL TEAMRECORDS', data: {id: '<%= team.id %>'}});">Records</a>
+					<a href = "#!" onclick="apretaste.send({command: 'BASEBALL PLAYERS', data: {team: '<%= team.id %>'}});">Miembros</a>
 				</div>
 			</div>
 		</div>
