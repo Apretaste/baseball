@@ -148,8 +148,8 @@ class BaseballService extends ApretasteService
 				"alternate_color" => "4ff566"
 			],
 			"records" => [
-				(object) ["name" => "record 1", 12],
-				(object) ["name" => "record 2", 23]
+				(object) ["name" => "record 1", "value" => 12],
+				(object) ["name" => "record 2", "value" => 23]
 			]
 		]);
 	}
