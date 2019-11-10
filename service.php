@@ -249,13 +249,11 @@ class BaseballService extends ApretasteService
 				"country" => "us",
 				"abbreviation" => "MLB"
 			],
-			"article" => [
-				(object) [
+			"article" => (object) [
 					"title" =>  Utils::randomSentence(),
 					"description" => Utils::randomSentence(),
 					"href" => ""
 				],
-			]
 		]);
 	}
 	/**
