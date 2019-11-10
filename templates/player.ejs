@@ -1,9 +1,6 @@
 <div class="row">
 	<div class="col s12">
 		<div class="card horizontal">
-			<div class="card-image">
-				<img src="{{APP_SERVICE_PATH}}/images/player.png">
-			</div>
 			<div class="card-stacked">
 				<div class="card-content">
                     <h1><%= player.name %></h1>
@@ -16,6 +13,12 @@
                         <i class="material-icons" style="color:#<%= team.alternate_color %>; border: 1px solid #eee;">label</i>
 					</p>
 				</div>
+			</div>
+            <div class="card-image">
+				<img src="{{APP_SERVICE_PATH}}/images/player.png">
+                 <p>#<%= player.number %>, <%= team.name %></p>
+                <p>Fecha de Nacimiento: <%= player.birthday %></p>
+                <p>Experiencie: <%= player.experience %></p>
 			</div>
 		</div>
 	</div>
