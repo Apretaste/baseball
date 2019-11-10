@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col">
-        <h1>Eventos - <%= league.abbreviation %>></h1>
+        <h1>Eventos - <%= league.abbreviation %></h1>
     </div>
 </div>
 
@@ -25,6 +25,7 @@
             <tr>
                 <td><%= event.date %></td>
                 <td><%= event.home %> (<%= event.home_score %>) vs <%= event.visitor %> (<%= event.visitor_score %>)</td>
+                <td><a href="#" onclick="apretaste.send({command: 'BASEBALL EVENT', data: {id: <%= event.id %>}});">ver</a></td>
             </tr>
         <% }%>
         </table>

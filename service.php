@@ -43,6 +43,7 @@ class BaseballService extends ApretasteService
 		$events = [];
 		for ($i=0;$i<30;$i++) {
 			$events[] = (object)[
+				"id" => $i,
 				"date" => "1/1/2020",
 				"home" => "ATL",
 				"visitor" => "BOS",
@@ -59,6 +60,33 @@ class BaseballService extends ApretasteService
 				"abbreviation" => "MLB"
 			],
 			"events" => $events
+		]);
+	}
+
+
+	public function event(){
+		$this->response->setTemplate("event.ejs", [
+			"event" => (object) [
+				"id" => 1,
+				"date" => "1/1/2020",
+				"place" => "New york city",
+				"name" => "ATL at BOS",
+				"home" => (object) [
+					"id" => 1,
+					"abbreviation" => "ATL",
+					"score" => rand(1, 10)
+				],
+				"visitor" => (object) [
+					"id" => 1,
+					"abbreviation" => "BOS",
+					"score" => rand(1, 10)
+				],
+				"scores" => [[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0]],
+				"statistics" => [
+					["R" => 1, "E" => 1, "H" => 1],
+					["R" => 1, "E" => 1, "H" => 1]
+				]
+			]
 		]);
 	}
 
