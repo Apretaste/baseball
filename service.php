@@ -160,6 +160,7 @@ class BaseballService extends ApretasteService
 
 		for ($i = 0; $i<50; $i++) {
 			$players[] = (object)[
+				"id" => $i,
 				"number" => $i + 1,
 				"name" => "Pepe Gonzalez",
 				"position" => "Pitcher"
