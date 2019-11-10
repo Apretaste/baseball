@@ -90,6 +90,34 @@ class BaseballService extends ApretasteService
 		]);
 	}
 
+	public function _teams()
+	{
+		$this->response->setTemplate("teams.ejs", [
+			"league" => (object) [
+				"id" => 1,
+				"name" => "Grandes ligas",
+				"country" => "us",
+				"abbreviation" => "MLB"
+			],
+			"teams" => [
+				(object) [
+					"id" => 1,
+					"name" => "Braves",
+					"abbreviation" => "BOS",
+					"color" => "445566",
+					"alternate_color" => "445566"
+				],
+				(object) [
+					"id" => 2,
+					"name" => "Atlanta",
+					"abbreviation" => "ATL",
+					"color" => "4455ff",
+					"alternate_color" => "4ff566"
+				]
+			]
+		]);
+	}
+
 	/**
 	MLB
 
