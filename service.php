@@ -213,6 +213,13 @@ class BaseballService extends ApretasteService
 
 		$this->response->setTemplate("player.ejs", [
 			"tab" => $tab,
+			"team" => (object) [
+				"id" => 1,
+				"name" => "Braves",
+				"abbreviation" => "BOS",
+				"color" => "445566",
+				"alternate_color" => "445566"
+			],
 			"player" => (object) [
 				"id" => 2,
 				"name" => "Sandy Alcantara",
