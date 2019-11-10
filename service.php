@@ -37,7 +37,6 @@ class BaseballService extends ApretasteService
 
 	public function _events()
 	{
-
 		$eventType = $this->request->input->data->type ?? 'past';
 
 		$events = [];
@@ -64,7 +63,8 @@ class BaseballService extends ApretasteService
 	}
 
 
-	public function event(){
+	public function _event()
+	{
 		$this->response->setTemplate("event.ejs", [
 			"event" => (object) [
 				"id" => 1,
