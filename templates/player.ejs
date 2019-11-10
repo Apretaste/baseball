@@ -1,15 +1,31 @@
 <div class="row">
-    <div class="col">
-        <h1><%= player.name %></h1>
-    </div>
+	<div class="col s12">
+		<div class="card horizontal">
+			<div class="card-image">
+				<img src="{{APP_SERVICE_PATH}}/images/MLB_TEAM_<%= team.abbreviation %>.png">
+			</div>
+			<div class="card-stacked">
+				<div class="card-content">
+                    <h1><%= player.name %></h1>
+                    <span style="color: white; background: #<%= team.color %>;padding:5px;float:right;"><%= team.abbreviation %></span>
+					<span class="card-title grey-text text-darken-4" onclick="apretaste.send({command: 'BASEBALL TEAM', data: {id: '<%= team.id %>'}});">
+						<%= team.name %>
+					</span>
+					<p>
+                        <i class="material-icons" style="color:#<%= team.color %>; border: 1px solid #eee;">label</i>
+                        <i class="material-icons" style="color:#<%= team.alternate_color %>; border: 1px solid #eee;">label</i>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
-
 <div class="row">
 	<div class="col s12">
 		<ul class="tabs tabs-fixed-width">
-            <li class="tab"><a href="#" onclick="apretaste.send({command: 'BASEBALL PLAYER', data:{tab: 'profile', id: <%= player.id %>,}})">Perfil</a></li>
-            <li class="tab"><a href="#" onclick="apretaste.send({command: 'BASEBALL PLAYER', data:{tab: 'records', id: <%= player.id %>,}})">Records</a></li>
-            <li class="tab"><a href="#" onclick="apretaste.send({command: 'BASEBALL PLAYER', data:{tab: 'events', id: <%= player.id %>}})">Juegos</a></li>
+            <li class="tab"><a <% if (tab == 'profile') { %> class="active" <% } %> href="#" onclick="apretaste.send({command: 'BASEBALL PLAYER', data:{tab: 'profile', id: <%= player.id %>,}})">Perfil</a></li>
+            <li class="tab"><a <% if (tab == 'records') { %> class="active" <% } %> href="#" onclick="apretaste.send({command: 'BASEBALL PLAYER', data:{tab: 'records', id: <%= player.id %>,}})">Records</a></li>
+            <li class="tab"><a <% if (tab == 'events') { %> class="active" <% } %> href="#" onclick="apretaste.send({command: 'BASEBALL PLAYER', data:{tab: 'events', id: <%= player.id %>}})">Juegos</a></li>
         </ul>
 	</div>
 </div>
