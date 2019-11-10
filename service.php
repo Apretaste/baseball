@@ -154,7 +154,17 @@ class BaseballService extends ApretasteService
 		]);
 	}
 
-	public function player()
+	public function _players()
+	{
+		$this->response->setTemplate("players.ejs", [
+			"player" => (object) [
+				"id" => 2,
+				"name" => "Pepe"
+			]
+		]);
+	}
+
+	public function _player()
 	{
 		$this->response->setTemplate("player.ejs", [
 			"player" => (object) [
