@@ -21,7 +21,7 @@
 <div class="row">
     <div class ="col">
         <table class="table striped">
-        <% for(var i=0; i <= events.length; i++) { var event = events[i]; %>
+        <% for(var i=0; i < events.length; i++) { var event = events[i]; %>
             <tr>
                 <td><%= event.date %></td>
                 <td><%= event.home %> (<% event.home_score %>) vs <%= event.visitor %> (<% event.visitor_score %>)</td>
