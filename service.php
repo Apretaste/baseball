@@ -118,6 +118,69 @@ class BaseballService extends ApretasteService
 		]);
 	}
 
+	public function _team()
+	{
+		$this->response->setTemplate("teams.ejs", [
+			"league" => (object) [
+				"id" => 1,
+				"name" => "Grandes ligas",
+				"country" => "us",
+				"abbreviation" => "MLB"
+			],
+			"team" => (object) [
+				"id" => 2,
+				"name" => "Atlanta",
+				"abbreviation" => "ATL",
+				"color" => "4455ff",
+				"alternate_color" => "4ff566"
+			]
+		]);
+	}
+
+	public function _teamrecords()
+	{
+		$this->response->setTemplate("team_records.ejs", [
+			"team" => (object) [
+				"id" => 2,
+				"name" => "Atlanta",
+				"abbreviation" => "ATL",
+				"color" => "4455ff",
+				"alternate_color" => "4ff566"
+			],
+			"records" => [
+				(object) ["name" => "record 1", 12],
+				(object) ["name" => "record 2", 23]
+			]
+		]);
+	}
+
+	public function player()
+	{
+		$this->response->setTemplate("team_records.ejs", [
+			"player" => (object) [
+				"id" => 2,
+				"name" => "Pepe"
+			]
+		]);
+	}
+
+	public function _playerrecords()
+	{
+		$this->response->setTemplate("player_records.ejs", [
+			"team" => (object) [
+				"id" => 2,
+				"name" => "Atlanta",
+				"abbreviation" => "ATL",
+				"color" => "4455ff",
+				"alternate_color" => "4ff566"
+			],
+			"records" => [
+				(object) ["name" => "record 1", 12],
+				(object) ["name" => "record 2", 23]
+			]
+		]);
+	}
+
 	/**
 	MLB
 
