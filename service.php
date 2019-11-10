@@ -242,7 +242,7 @@ class BaseballService extends ApretasteService
 	 */
 	public function _new()
 	{
-		$this->response->setTemplate("news.ejs", [
+		$this->response->setTemplate("new.ejs", [
 			"league" => (object) [
 				"id" => 1,
 				"name" => "Grandes ligas",
