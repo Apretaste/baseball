@@ -1,0 +1,26 @@
+<div class="row">
+	<div class="col s12">
+		<h1>Ligas de Baseball</h1>
+	</div>
+</div>
+
+<div class="row">
+  <div class="col s12 l12 m12 x12">
+     <% for(var l = 0; l< leagues.length; l++) { var league = leagues[l]; %>
+     <div class="card horizontal">
+         <img src="{{APP_SERVICE_PATH}}/images/<%= league.abbreviation %>.png" style="position: absolute;top: 5px;right: 5px;z-index: 0;height: 30%;opacity: 0.2;">
+          <div class="card-stacked">
+              <div class="card-content">
+                  <span class="card-title grey-text text-darken-4" style="font-weight: bold;width: 50%;"><%= league.name %></span>
+                  <p><img class="flag" src="{{APP_RESOURCES}}/images/flags/<%= league.country %>.png"/></p>
+              </div>
+              <div class="card-action">
+                  <a href="#!" onclick="apretaste.send({command: 'BASEBALL EVENTS', data: {league: <%= league.id %>}});">JUEGOS</a>
+                  <a href="#!" onclick="apretaste.send({command: 'BASEBALL TEAMS', data: {league: <%= league.id %>}});">EQUIPOS</a>
+                  <a href="#!" onclick="apretaste.send({command: 'BASEBALL NEWS', data: {league: <%= league.id %>}});">NOTICIAS</a>
+              </div>
+          </div>
+      </div>
+      <% } %>
+  </div>
+</div>

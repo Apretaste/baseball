@@ -19,12 +19,21 @@ class BaseballService extends ApretasteService
 	 **/
 	public function _main()
 	{
-		//$this->response->setLayout('baseball.ejs');
-
-		if (empty($this->request->input->data->query) || (strtolower($this->request->input->data->query)!='liga') || (strtolower($this->request->input->data->query)!='jornada') || (strtolower($this->request->input->data->query)!='equipo')) {
-			$this->response->setCache("day");
-			$this->response->setTemplate("selectLiga.ejs", ["ligas" => []]);
-		}
+		$this->response->setCache("day");
+		$this->response->setTemplate("leagues.ejs", ["leagues" => [
+			(object) [
+				"id" => 1,
+				"name" => "Grandes ligas",
+				"country" => "us",
+				"abbreviation" => "MLB"
+			],
+			(object) [
+				"id" => 2,
+				"name" => "Liga cubana",
+				"country" => "cu",
+				"abbreviation" => "SNB"
+			]
+		]]);
 	}
 
 	/**
@@ -476,4 +485,5 @@ class BaseballService extends ApretasteService
 
 		return $texto;
 	}
+
 }
