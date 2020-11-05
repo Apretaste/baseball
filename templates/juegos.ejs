@@ -23,12 +23,12 @@
 					<% item.games.forEach(function(item) { %>
 						<ul class="collection teams clean">
 							<li class="collection-item avatar col s6">
-								<img class="circle" src="{{APP_IMAGE_PATH}}<%= item.teamA %>.jpg" alt="<%= item.teamA %>">
+								<img class="circle" src="{{APP_SERVICE_PATH}}/images/<%= item.teamA %>.jpg" alt="<%= item.teamA %>">
 								<span class="title"><%= item.teamA %></span>
 								<p class="blue-grey-text"><%= item.scoreA %> puntos</p>
 							</li>
 							<li class="collection-item avatar col s6">
-								<img class="circle" src="{{APP_IMAGE_PATH}}<%= item.teamB %>.jpg" alt="<%= item.teamB %>">
+								<img class="circle" src="{{APP_SERVICE_PATH}}/images/<%= item.teamB %>.jpg" alt="<%= item.teamB %>">
 								<span class="title"><%= item.teamB %></span>
 								<p class="blue-grey-text"><%= item.scoreB %> puntos</p>
 							</li>

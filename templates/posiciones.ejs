@@ -13,7 +13,7 @@
 		<ul class="collection">
 			<% items.forEach(function(item, i) { %>
 				<li class="collection-item avatar">
-					<img class="circle" src="{{APP_IMAGE_PATH}}<%= item.province %>.jpg" alt="<%= item.province %>">
+					<img class="circle" src="{{APP_SERVICE_PATH}}/images/<%= item.province %>.jpg" alt="<%= item.province %>">
 					<span class="title"><b>#<%= i+1 %></b> <%= provinces[item.province] %></span>
 					<p class="blue-grey-text"><%= item.jg %> ganados y <%= item.jp %> perdidos</p>
 					<p>Promedio de <%= item.ave %></p>

@@ -16,7 +16,7 @@
 				<ul class="collection one-line clean">
 					<% bat.forEach(function(item) { %>
 						<li class="collection-item avatar">
-							<img class="circle" src="{{APP_IMAGE_PATH}}<%= item.team %>.jpg" alt="<%= item.team %>">
+							<img class="circle" src="{{APP_SERVICE_PATH}}/images/<%= item.team %>.jpg" alt="<%= item.team %>">
 							<span class="title"><%= item.name %></span>
 							<p class="blue-grey-text">Promedio de bateo <%= item.ave %></p>
 						</li>
@@ -30,7 +30,7 @@
 			<ul class="collection one-line">
 				<% pitch.forEach(function(item) { %>
 					<li class="collection-item avatar">
-						<img class="circle" src="{{APP_IMAGE_PATH}}<%= item.team %>.jpg" alt="<%= item.team %>">
+						<img class="circle" src="{{APP_SERVICE_PATH}}/images/<%= item.team %>.jpg" alt="<%= item.team %>">
 						<span class="title"><%= item.name %></span>
 						<p class="blue-grey-text">Promedio de carreras limpias <%= item.pcl %></p>
 					</li>
