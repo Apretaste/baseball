@@ -1,0 +1,71 @@
+<div class="row">
+	<div class="col s12">
+		<ul class="tabs tabs-fixed-width">
+			<li class="tab"><a href="#" onclick="apretaste.send({command:'BASEBALL POSICIONES'})">Posiciones</a></li>
+			<li class="tab"><a href="#" class="active">Juegos</a></li>
+			<li class="tab"><a href="#" onclick="apretaste.send({command:'BASEBALL LIDERES'})">Líderes</a></li>
+		</ul>
+	</div>
+
+	<!-- FILTERS -->
+	<div class="col s12 space-top">
+		<div class="chip tiny"><%= filter.charAt(0).toUpperCase() + filter.slice(1) %></div>
+	</div>
+
+	<!-- GAMES -->
+	<div class="col s12">
+		<% items.forEach(function(item) { %>
+			<div class="card">
+				<div class="card-person grey lighten-5">
+					<span class="chip tiny clear"><i class="fas fa-calendar"></i> <%= moment(item.date).format('D [de] MMMM [del] YYYY') %></span>
+				</div>
+				<div class="card-content small-padding">
+					<% item.games.forEach(function(item) { %>
+						<ul class="collection teams clean">
+							<li class="collection-item avatar col s6">
+								<img class="circle" src="{{APP_IMAGE_PATH}}<%= item.teamA %>.jpg" alt="<%= item.teamA %>">
+								<span class="title"><%= item.teamA %></span>
+								<p class="blue-grey-text"><%= item.scoreA %> puntos</p>
+							</li>
+							<li class="collection-item avatar col s6">
+								<img class="circle" src="{{APP_IMAGE_PATH}}<%= item.teamB %>.jpg" alt="<%= item.teamB %>">
+								<span class="title"><%= item.teamB %></span>
+								<p class="blue-grey-text"><%= item.scoreB %> puntos</p>
+							</li>
+						</ul>
+					<% }) %>
+				</div>
+			</div>
+		<% }) %>
+	</div>
+</div>
+
+<!-- BUTTONS -->
+
+<div class="bottom-space"></div>
+
+<div class="fixed-action-btn">
+	<a class="btn-floating btn-large green modal-trigger" href="#searchModal">
+		<i class="large material-icons">search</i>
+	</a>
+</div>
+
+<!-- SEARCH MODAL -->
+
+<div id="searchModal" class="modal bottom-sheet fullscreen">
+	<div class="modal-content">
+		<p>Escoja un filtro</p>
+		<div class="checks">
+			<span value="recientes" class="check chip spacing active">Recientes</span>
+			<span value="hoy" class="check chip spacing">Hoy</span>
+			<span value="pasados" class="check chip spacing">Pasados</span>
+			<span value="futuros" class="check chip spacing">Futuros</span>
+			<span value="todos" class="check chip spacing">Todos</span>
+		</div>
+	</div>
+
+	<div class="modal-footer">
+		<a href="#!" class="modal-close waves-effect btn-flat">Cerrar</a>
+		<a href="#!" class="waves-effect green-text btn-flat" onclick="searchByTag()">Buscar</a>
+	</div>
+</div>

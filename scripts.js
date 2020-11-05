@@ -1,22 +1,64 @@
-function formatDate(dateStr) {
-  var date = new Date(dateStr);
-  var year = date.getFullYear();
-  var month = (1 + date.getMonth()).toString().padStart(2, '0');
-  var day = date.getDate().toString().padStart(2, '0');
-  return day + '/' + month + '/' + year;
-}
+//
+// list of provinces
+//
+var provinces = {
+	PRI: 'Pinar del Río',
+	ART: 'Artemisa',
+	IND: 'Industriales',
+	IJV: 'Isla de la Juventud',
+	MAY: 'Mayabeque',
+	MTZ: 'Matanzas',
+	CFG: 'Cienfuegos',
+	VCL: 'Villa Clara',
+	SSP: 'Sancti Spíritus',
+	CAV: 'Ciego de Avila',
+	CMG: 'Camaguey',
+	LTU: 'Las Tunas',
+	HOL: 'Holguín',
+	GRA: 'Granma',
+	SCU: 'Santiago de Cuba',
+	GTM: 'Guantánamo'};
 
-function tomorrowDate(){
-	var date = new Date(Date.now());
-	date.setDate(date.getDate()+1);
-	return date;
-}
+$(document).ready(function() {
+	//
+	// start basic components
+	//
+	$('.tabs').tabs();
+	$('.modal').modal();
 
+	//
+	// start check component
+	//
 
-$(function(){
-	/*$(".datatable").DataTable({
-		scrollY:        200,
-		deferRender:    true,
-		scroller:       true
-	});*/
+	// checks/uncheck components
+	$('.checks .check').click(function() {
+		$('.checks .check').removeClass('active');
+		$(this).addClass('active');
+	})
+
+	// get values of active "checks" components
+	$.fn.value = function() {
+		var values = [];
+		$(this).find('.check').each(function(i, e){
+			if($(e).hasClass('active')) {
+				values.push($(e).attr('value'));
+			}
+		})
+
+		return values;
+	}
 });
+
+//
+// search for a tag
+//
+function searchByTag() {
+	// get tag selected
+	var value = $('.checks').value();
+
+	// send request
+	apretaste.send({
+		command: 'BASEBALL JUEGOS',
+		data: {filter: value[0]}
+	})
+}

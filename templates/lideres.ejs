@@ -1,0 +1,41 @@
+<div class="row">
+	<div class="col s12">
+		<ul class="tabs tabs-fixed-width">
+			<li class="tab"><a href="#" onclick="apretaste.send({command:'BASEBALL POSICIONES'})">Posiciones</a></li>
+			<li class="tab"><a href="#" onclick="apretaste.send({command:'BASEBALL JUEGOS'})">Juegos</a></li>
+			<li class="tab"><a href="#" class="active">Líderes</a></li>
+		</ul>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col s12">
+		<div class="card">
+			<div class="card-person grey lighten-5">Líderes de bateo</div>
+			<div class="card-content small-padding">
+				<ul class="collection one-line clean">
+					<% bat.forEach(function(item) { %>
+						<li class="collection-item avatar">
+							<img class="circle" src="{{APP_IMAGE_PATH}}<%= item.team %>.jpg" alt="<%= item.team %>">
+							<span class="title"><%= item.name %></span>
+							<p class="blue-grey-text">Promedio de bateo <%= item.ave %></p>
+						</li>
+					<% }) %>
+				</ul>
+			</div>
+		</div>
+
+		<div class="card">
+			<div class="card-person grey lighten-5">Líderes de pitcheo</div>
+			<ul class="collection one-line">
+				<% pitch.forEach(function(item) { %>
+					<li class="collection-item avatar">
+						<img class="circle" src="{{APP_IMAGE_PATH}}<%= item.team %>.jpg" alt="<%= item.team %>">
+						<span class="title"><%= item.name %></span>
+						<p class="blue-grey-text">Promedio de carreras limpias <%= item.pcl %></p>
+					</li>
+				<% }) %>
+			</ul>
+		</div>
+	</div>
+</div>

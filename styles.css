@@ -1,17 +1,77 @@
-td {
-	white-space:nowrap;
-	padding:2px;
-	border: 1px solid #eeeeee;
-	text-align: center;
+/* TAGS */
+
+.chip .icon {
+	float: left;
+	font-size: 16px;
+	line-height: 32px;
+	padding-right: 5px;
 }
 
-#versus {
-	position: absolute;
-	top: 25%;
-	left: 50%;
-	font-size: 3rem;
-	margin-left: -1.5rem;
-	font-style: italic;
-	font-family: "Times New Roman", serif;
-	color: gray;
+.chip.tiny {
+	height: 20px;
+	padding: 0 10px;
+	line-height: 20px;
+	font-size: x-small;
+}
+
+.chip.tiny .icon {
+	line-height: 20px;
+}
+
+.chip.medium {
+	height: 20px;
+	line-height: 1.5;
+}
+
+.chip.clear {
+	color: rgba(0,0,0,0.87);
+	margin: 0px;
+	padding: 0px;
+	background-color: transparent;
+}
+
+.chip.spacing {
+	margin-right: 5px;
+}
+
+/* TAGS CHECKS */
+
+.checks .check.active {
+	background-color: #81c784;
+}
+
+/* COLLECTION */
+
+.collection.one-line .avatar {
+	min-height: 63px;
+}
+
+.collection.clean, .collection.clean .collection-item {
+	border: 0px;
+}
+
+.collection.teams .avatar {
+	min-height: 45px;
+}
+
+/* CARDS */
+
+.card .card-person {
+	padding: 10px 16px;
+}
+
+.card-content.small-padding {
+	padding: 5px;
+}
+
+/* MODAL */
+
+.modal.fullscreen {
+	max-height: 100% !important;
+}
+
+/* FILTERS SPACE TOP */
+
+.space-top {
+	margin-top:10px;
 }

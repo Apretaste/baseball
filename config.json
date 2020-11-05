@@ -1,8 +1,10 @@
 {
 	"name": "baseball",
-	"version": "1",
-	"description": "Consulta y muestra resultados de algunos torneos importantes de baseball",
+	"caption": "Béisbol",
+	"description": "Muestra los resultados de la liga nacional de baseball.",
 	"category": "ocio",
-	"creator": "kumahacker@gmail.com",
-	"listed": true
+	"creator": "salvi@apretaste.org",
+	"listed": true,
+	"guest": true,
+	"ads": true
 }
