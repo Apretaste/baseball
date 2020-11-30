@@ -2,6 +2,8 @@
 
 use Apretaste\Request;
 use Apretaste\Response;
+use Framework\Crawler;
+use Rct567\DomQuery\DomQuery;
 
 class Service
 {
@@ -26,24 +28,53 @@ class Service
 	 */
 	public function _posiciones(Request $request, Response $response)
 	{
-		$items = [
-			["province" => "MTZ", "jg" => 26, "jp" => 14, "ave" => ".650"],
-			["province" => "CMG", "jg" => 23, "jp" => 13, "ave" => ".639"],
-			["province" => "CFG", "jg" => 23, "jp" => 15, "ave" => ".606"],
-			["province" => "GRA", "jg" => 24, "jp" => 16, "ave" => ".600"],
-			["province" => "SSP", "jg" => 23, "jp" => 16, "ave" => ".590"],
-			["province" => "SCU", "jg" => 23, "jp" => 16, "ave" => ".590"],
-			["province" => "IND", "jg" => 22, "jp" => 18, "ave" => ".550"],
-			["province" => "PRI", "jg" => 19, "jp" => 18, "ave" => ".514"],
-			["province" => "VCL", "jg" => 19, "jp" => 18, "ave" => ".514"],
-			["province" => "LTU", "jg" => 18, "jp" => 19, "ave" => ".487"],
-			["province" => "HOL", "jg" => 18, "jp" => 20, "ave" => ".474"],
-			["province" => "MAY", "jg" => 17, "jp" => 21, "ave" => ".448"],
-			["province" => "CAV", "jg" => 14, "jp" => 22, "ave" => ".389"],
-			["province" => "GTM", "jg" => 13, "jp" => 26, "ave" => ".334"],
-			["province" => "ART", "jg" => 11, "jp" => 26, "ave" => ".298"],
-			["province" => "IJV", "jg" => 8, "jp" => 23, "ave" => ".259"],
+		$provincesCode = [
+			'artemisa' => 'ART',
+			'ciego de avila' => 'CAV',
+			'cienfuegos' => 'CFG',
+			'camaguey' => 'CMG',
+			'granma' => 'GRA',
+			'guantanamo' => 'GTM',
+			'holguin' => 'HOL',
+			'isla de la juventud' => 'IJV',
+			'industriales' => 'IND',
+			'las tunas' => 'LTU',
+			'mayabeque' => 'MAY',
+			'matanzas' => 'MTZ',
+			'pinar del rio' => 'PRI',
+			'santiago de cuba' => 'SCU',
+			'santi spiritus' => 'SSP',
+			'villa clara' => 'VCL'
 		];
+
+		$html = Crawler::getCache("http://www.beisbolencuba.com/series/serie-nacional-beisbol-2020-2021/todos-contra/posiciones");
+
+		$items = [];
+		$dom = new DomQuery($html);
+		$rows = $dom->find('table.stats tr');
+
+		$j = 0;
+		foreach ($rows as $row) {
+
+			$j++;
+
+			// avoid header
+			if ($j == 1) continue;
+
+			$columns = $row->children('td');
+			$i = 0;
+			$newItem = ['province' => '', 'jg' => 0, 'jp' => 0, 'ave' => ''];
+			foreach($columns as $column) {
+				$i++;
+				if ($i == 2) $newItem['province'] = $provincesCode[strtolower($column->text())] ?? '';
+				if ($i == 4) $newItem['jg'] = $column->text();
+				if ($i == 5) $newItem['jp'] = $column->text();
+				if ($i == 6) $newItem['ave'] = $column->text();
+
+				if ($i > 6 ) break;
+			}
+			$items[] = $newItem;
+		}
 
 		$response->setTemplate("posiciones.ejs", ['items' => $items]);
 	}
@@ -58,27 +89,102 @@ class Service
 	 */
 	public function _juegos(Request $request, Response $response)
 	{
+		$html = Crawler::getCache("http://www.beisbolencuba.com/series/serie-nacional-beisbol-2020-2021/todos-contra");
+
+		$items = [];
+		$dom = new DomQuery($html);
+		$rows = $dom->find('table.games tr');
+
+		$date = null;
+		$i = 0;
+		foreach ($rows as $row) {
+			if ($row->hasClass('gdate')) {
+				$data = $row->find("h3 a");
+				$date = $data[0]->text();
+				$items[++$i] = [
+					"date" => $date,
+					"games" => []
+				];
+			}
+
+			if ($row->hasClass('gdata')) {
+
+				$columns = $row->find('td');
+
+				foreach ($columns as $column) {
+
+					$tableGame = $column->find('table')[0];
+					$gameRows = $tableGame->find('tr');
+					$firstRow = $gameRows[1];
+					$firstColumns = $firstRow->find('td');
+					$secondRow = $gameRows[2];
+					$secondColumns = $secondRow->find('td');
+
+					$teamA = strip_tags($firstColumns[1]->html());
+					if (empty(trim($teamA))) continue;
+
+					$items[$i]['games'][] = [
+						"teamA" => $teamA,
+						"scoreA" => strip_tags($firstColumns[2]->html()),
+						"teamB" => strip_tags($secondColumns[1]->html()),
+						"scoreB" => strip_tags($secondColumns[2]->html())
+					];
+
+				}
+			}
+
+		}
+
 		// get the filter
 		// NOTE: Reciente devuelve el proximo juego y los tres ultimos 
 		$filter = $request->input->data->filter ?? "recientes";
+		$filtered = [];
+		$today = strtotime(date('Y-m-d'));
+		$i = 0;
+		$last3 = [];
+		foreach($items as $item) {
+			$fStr = str_ireplace(
+				[' de ', 'enero','febrero','marzo','abril','mayo','junio',
+					'julio','agosto','septiembre',
+					'octubre','noviembre','diciembre'],
+				[' ', 'jan','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dec'], $item['date']);
+			$fecha = strtotime($fStr);
 
-		$items = [
-			["date" => "09/12/2020", "games" => [
-				["teamA" => "CMG", "scoreA" => 15, "teamB" => "MTZ", "scoreB" => 8],
-				["teamA" => "MAY", "scoreA" => 9, "teamB" => "LTU", "scoreB" => 5],
-				["teamA" => "ART", "scoreA" => 3, "teamB" => "GRA", "scoreB" => 2],
-				["teamA" => "IJV", "scoreA" => 6, "teamB" => "SCU", "scoreB" => 7],
-				["teamA" => "IND", "scoreA" => 10, "teamB" => "GTM", "scoreB" => 4]
-			]],
-			["date" => "09/11/2020", "games" => [
-				["teamA" => "CMG", "scoreA" => 15, "teamB" => "MTZ", "scoreB" => 8],
-				["teamA" => "ART", "scoreA" => 3, "teamB" => "GRA", "scoreB" => 2],
-				["teamA" => "IJV", "scoreA" => 6, "teamB" => "SCU", "scoreB" => 7],
-				["teamA" => "IND", "scoreA" => 10, "teamB" => "GTM", "scoreB" => 4]
-			]],
-		];
+			switch($filter) {
+				case 'recientes':
+					if ($fecha >= $today || !isset($items[$i + 1])) {
+						if (isset($items[$i - 3])) $filtered[] = $items[$i - 3];
+						if (isset($items[$i - 2])) $filtered[] = $items[$i - 2];
+						if (isset($items[$i - 1])) $filtered[] = $items[$i - 1];
+						$filtered[] = $item;
+						break 2;
+					}
+					break;
+				case 'hoy':
+					if ($fecha == $today) {
+						$filtered[] = $item;
+						break 2;
+					}
+					break;
+				case 'pasados':
+					if ($fecha < $today) {
+						$filtered[] = $item;
+					}
+					break;
+				case 'futuros':
+					if ($fecha >= $today) {
+						$filtered[] = $item;
+					}
+					break;
+				default:
+					$filtered = $items;
+					break 2;
+			}
+			$i++;
+		}
 
-		$response->setTemplate("juegos.ejs", ['items' => $items, 'filter' => $filter]);
+
+		$response->setTemplate("juegos.ejs", ['items' => (array) $filtered, 'filter' => $filter]);
 	}
 
 	/**
@@ -91,23 +197,54 @@ class Service
 	 */
 	public function _lideres(Request $request, Response $response)
 	{
-		// bat leaders
-		$bat = [
-			["name" => "Humberto Bravo", "team" => "CMG", "ave" => ".426"],
-			["name" => "Pavel Quesada", "team" => "CFG", "ave" => ".400"],
-			["name" => "César Prieto", "team" => "CFG", "ave" => ".396"],
-			["name" => "Loidel Chapelli", "team" => "CMG", "ave" => ".391"],
-			["name" => "Yordanis Samón", "team" => "CMG", "ave" => ".391"]
-		];
+		// bateo
+		$html = Crawler::getCache("https://www.beisbolencuba.com/series/serie-nacional-beisbol-2020-2021/todos-contra/estadisticas/promedio-de-bateo");
 
-		// pitcher leaders
-		$pitch = [
-			["name" => "Reinier Rivero", "team" => "MTZ", "pcl" => "1.27"],
-			["name" => "Yankiel Mauri", "team" => "SSP", "pcl" => "1.30"],
-			["name" => "Pablo Luis Guillén", "team" => "VCL", "pcl" => "1.85"],
-			["name" => "Lázaro Blanco", "team" => "GRA", "pcl" => "2.01"],
-			["name" => "Yoandri Montero", "team" => "SCU", "pcl" => "2.61"]
-		];
+		$dom = new DomQuery($html);
+		$stats = $dom->find('table.stats')[0];
+		$rows = $stats->find('tr');
+		$bat = [];
+		foreach($rows as $row){
+			$td = $row->find('td');
+
+			if (count($td) == 0) continue;
+
+			$name = strip_tags($td[1]->html());
+			$name = explode(',', $name);
+			$team = $name[1] ?? '';
+			$name = $name[0];
+			$ave = strip_tags($td[9]->html());
+
+			$bat[] = [
+				"name" => $name,
+				"team" => $team,
+				"ave" => $ave
+			];
+		}
+
+		$html = Crawler::getCache("https://www.beisbolencuba.com/series/serie-nacional-beisbol-2020-2021/todos-contra/estadisticas/promedio-de-ganados");
+
+		$dom = new DomQuery($html);
+		$stats = $dom->find('table.stats')[0];
+		$rows = $stats->find('tr');
+		$pitch = [];
+		foreach($rows as $row){
+			$td = $row->find('td');
+
+			if (count($td) == 0) continue;
+
+			$name = strip_tags($td[1]->html());
+			$name = explode(',', $name);
+			$team = $name[1] ?? '';
+			$name = $name[0];
+			$pcl = strip_tags($td[13]->html());
+
+			$pitch[] = [
+				"name" => $name,
+				"team" => $team,
+				"pcl" => $pcl
+			];
+		}
 
 		$response->setTemplate("lideres.ejs", ['bat' => $bat, 'pitch' => $pitch]);
 	}

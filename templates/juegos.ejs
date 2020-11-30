@@ -12,31 +12,40 @@
 		<div class="chip tiny"><%= filter.charAt(0).toUpperCase() + filter.slice(1) %></div>
 	</div>
 
+	<% if (items.length < 1) { %>
+		<div class="row">
+			<div class="col s12 center">
+				<p class="middle-center grey-text">No encontramos juegos para la b&uacute;squeda solicitada.</p>
+			</div>
+		</div>
+	<% }%>
+
 	<!-- GAMES -->
 	<div class="col s12">
-		<% items.forEach(function(item) { %>
+
+		<% for(var i in items) { var item = items[i]; %>
 			<div class="card">
 				<div class="card-person grey lighten-5">
-					<span class="chip tiny clear"><i class="fas fa-calendar"></i> <%= moment(item.date).format('D [de] MMMM [del] YYYY') %></span>
+					<span class="chip tiny clear"><i class="fas fa-calendar"></i> <%= item.date /*moment(item.date).format('D [de] MMMM [del] YYYY')*/ %></span>
 				</div>
 				<div class="card-content small-padding">
-					<% item.games.forEach(function(item) { %>
+					<% for(var j in item.games) { var game =  item.games[j]; %>
 						<ul class="collection teams clean">
 							<li class="collection-item avatar col s6">
-								<img class="circle" src="{{APP_SERVICE_PATH}}/images/<%= item.teamA %>.jpg" alt="<%= item.teamA %>">
-								<span class="title"><%= item.teamA %></span>
-								<p class="blue-grey-text"><%= item.scoreA %> puntos</p>
+								<img class="circle" src="{{APP_SERVICE_PATH}}/images/<%= game.teamA %>.jpg" alt="<%= game.teamA %>">
+								<span class="title"><%= game.teamA %></span>
+								<p class="blue-grey-text"><%= game.scoreA %> puntos</p>
 							</li>
 							<li class="collection-item avatar col s6">
-								<img class="circle" src="{{APP_SERVICE_PATH}}/images/<%= item.teamB %>.jpg" alt="<%= item.teamB %>">
-								<span class="title"><%= item.teamB %></span>
-								<p class="blue-grey-text"><%= item.scoreB %> puntos</p>
+								<img class="circle" src="{{APP_SERVICE_PATH}}/images/<%= game.teamB %>.jpg" alt="<%= game.teamB %>">
+								<span class="title"><%= game.teamB %></span>
+								<p class="blue-grey-text"><%= game.scoreB %> puntos</p>
 							</li>
 						</ul>
-					<% }) %>
+					<% } %>
 				</div>
 			</div>
-		<% }) %>
+		<% } %>
 	</div>
 </div>
 
