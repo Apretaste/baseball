@@ -211,9 +211,9 @@ class Service
 
 			$name = strip_tags($td[1]->html());
 			$name = explode(',', $name);
-			$team = $name[1] ?? '';
-			$name = $name[0];
-			$ave = strip_tags($td[9]->html());
+			$team = trim($name[1] ?? '');
+			$name = trim($name[0]);
+			$ave = trim(strip_tags($td[9]->html()));
 
 			$bat[] = [
 				"name" => $name,
@@ -235,8 +235,8 @@ class Service
 
 			$name = strip_tags($td[1]->html());
 			$name = explode(',', $name);
-			$team = $name[1] ?? '';
-			$name = $name[0];
+			$team = trim($name[1] ?? '');
+			$name = trim($name[0]);
 			$pcl = strip_tags($td[13]->html());
 
 			$pitch[] = [
